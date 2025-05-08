@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import Layout from "@/components/layout";
 
 const font = Noto_Sans_JP({
+   subsets: ["latin", "cyrillic"],
    variable: "--font-primary",
 });
 

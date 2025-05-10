@@ -4,7 +4,7 @@ import path from "path";
 
 const router = Router();
 
-router.post("/", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
    try {
       const projectPath = process.env.PROJECT_PATH;
       const appName = process.env.APP_NAME;

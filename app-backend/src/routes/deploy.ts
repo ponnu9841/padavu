@@ -15,7 +15,7 @@ router.post("/", async (req, res, next) => {
             .json({ error: "Missing projectPath or appName" });
       }
 
-      const scriptPath = path.join(__dirname, "../../", "deploy.sh");
+      const scriptPath = path.join(__dirname, "../../../../deploy.sh");
 
       const envVars = {
          ...process.env,

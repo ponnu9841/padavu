@@ -2,12 +2,9 @@ import express, { Request, Response, type Express } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import Deploy from "./routes/deploy"
+import dotenv from "dotenv";
 
-interface DeployRequestBody {
-   projectPath: string;
-   appName: string;
-}
-
+dotenv.config();
 const app: Express = express();
 const PORT = process.env.PORT ?? 8000;
 app.use(bodyParser.json());

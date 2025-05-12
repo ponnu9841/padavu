@@ -8,32 +8,32 @@ dotenv.config();
 const app: Express = express();
 const PORT = process.env.PORT ?? 8000;
 app.use(bodyParser.json());
-// app.use(
-//    cors({
-//       origin: function (origin, callback) {
-//          const allowedOrigins = [
-//             "http://localhost:3000",
-//          ];
-//          if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//             callback(null, true);
-//          } else {
-//             callback(new Error("Not allowed by CORS"));
-//          }
-//       },
-//       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//       allowedHeaders: [
-//          "Content-Type",
-//          "Authorization",
-//          "X-Requested-With",
-//          "Accept",
-//       ],
-//       credentials: true,
-//    })
-// );
-// app.options("*", cors());
+app.use(
+   cors({
+      origin: function (origin, callback) {
+         const allowedOrigins = [
+            "http://localhost:3000",
+         ];
+         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+         } else {
+            callback(new Error("Not allowed by CORS"));
+         }
+      },
+      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      allowedHeaders: [
+         "Content-Type",
+         "Authorization",
+         "X-Requested-With",
+         "Accept",
+      ],
+      credentials: true,
+   })
+);
+app.options("*", cors());
 
 // Middleware to parse JSON bodies
-// app.use(express.static("public"));
+app.use(express.static("public"));
 app.use(express.json());
 
 // Middleware to parse URL-encoded bodies

@@ -4,7 +4,7 @@ import NavigationMenu from "./navigation-menu";
 export default function Layout({ children }: { children: ReactNode }) {
    return (
       <>
-         <header className="bg-primary text-background p-4 sticky top-0 z-10 shadow h-[100px] flex items-center">
+         <header className="bg-primary text-background p-4 sticky top-0 z-10 shadow h-25 flex items-center">
             <div className="container flex justify-between items-center">
                <div className="text-2xl font-bold">
                   <h1 className="text-4xl">PADAVU</h1>

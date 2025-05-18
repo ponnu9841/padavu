@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import type { AppProps } from "next/app";
 // import { ThemeProvider } from "@/components/theme-provider";
 // import { Provider } from "react-redux";
-// import { Toaster } from "sonner";
+import { Toaster } from "sonner";
 // import store from "@/redux/store";
 // import ReduxWrapper from "@/reduxWrapper";
 import "@/styles/globals.css";
@@ -34,8 +34,10 @@ export default function App(props: AppPropsWithLayout) {
 						// 	enableSystem
 						// 	disableTransitionOnChange
 						// >
-							<Component {...pageProps} />
-							// <Toaster />
+							<>
+								<Component {...pageProps} />
+								<Toaster />
+							</>
 						// </ThemeProvider>
 					)}
 				{/* // </ReduxWrapper> */}

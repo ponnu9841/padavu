@@ -114,6 +114,12 @@
    --sidebar-ring: oklch(0.556 0 0);
 }
 
+.error-toast {
+	background-color: var(--destructive) !important;
+	color: white;
+	border-radius: var(--radius);
+}
+
 .container {
    max-width: 90rem;
    @apply mx-auto;

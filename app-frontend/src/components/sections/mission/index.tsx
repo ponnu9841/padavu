@@ -1,13 +1,17 @@
 import NextImage from "@/components/Image";
 import { ShadowGradient } from "../about";
+import AnimatedTypography from "@/components/animation/animated-typography";
 
 export default function Mission() {
    return (
       <section className="px-4 flex flex-col md:flex-row gap-6 max-w-6xl mx-auto">
          <div className="md:w-3/5 text-primary/90">
-            <h2 className="text-2xl font-bold mb-6">
-               Our Mission
-            </h2>
+            {/* <h2 className="text-2xl font-bold mb-6">Our Mission</h2> */}
+            <AnimatedTypography
+               variant="h2"
+               text="Our Mission"
+               className="text-2xl font-bold mb-6 text-primary/90"
+            />
 
             <p className="mb-4 text-sm">
                At Padavu Interio, we deliver interior design solutions with
@@ -25,10 +29,9 @@ export default function Mission() {
          </div>
          <div className="md:w-2/5 relative">
             <NextImage
+               className="aspect-[3/2] md:aspect-auto md:w-full md:rounded-r-large"
                src="/images/about.webp"
-               alt="Modern interior with plants"
-               className="w-full h-auto h-full"
-               imageClassName="object-cover rounded-r-large"
+               imageClassName="md:object-cover md:rounded-r-[5rem]"
             />
             <ShadowGradient />
          </div>

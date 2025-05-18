@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import { RenderCarouselItem } from "./carousel-item";
 import { cn } from "@/lib/utils";
+import { RenderElement } from "@/components/render-element";
 
 const CarouselSlider = (props: CarouselSliderProps) => {
    const {
@@ -105,10 +106,24 @@ const CarouselSlider = (props: CarouselSliderProps) => {
                   {!!children && children}
                   {showTitle && (
                      <>
-                        <div className="absolute inset-0 bg-black/50"></div>
-                        <div className="absolute top-1/2 -translate-y-1/2 left-0 px-10 md:px-32 text-white">
-                           {image.title && <h1 className="text-display">{image.title}</h1>}
-                           {image.description && <p className="max-w-4xl">{image.description}</p>}
+                        <div className="absolute bottom-10 md:bottom-20 lg:bottom-40 left-0 w-full h-1/2 z-2 bg-[linear-gradient(180deg,_transparent_0%,_var(--secondary)_50%)]"></div>
+                        <div className="absolute top-1/3 left-0 px-10 md:px-32 text-white z-3">
+                           {image.title && (
+                              <RenderElement
+                                 variant="h1"
+                                 className="text-display"
+                                 title={image.title}
+                                 animation="fadeInDown"
+                              />
+                           )}
+                           {image.description && (
+                              <RenderElement
+                                 variant="p"
+                                 className="max-w-4xl"
+                                 title={image.description}
+                                 animation="fadeInUp"
+                              />
+                           )}
                         </div>
                      </>
                   )}

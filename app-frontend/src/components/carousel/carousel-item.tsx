@@ -25,7 +25,7 @@ export const RenderCarouselItem = ({
 			)}
 		>
 			<Card
-				className={cn("border-none p-0 h-full", cardClassName)}
+				className={cn("border-none p-0 h-full shadow-none", cardClassName)}
 			>
 				<CardContent
 					className={cn(

@@ -20,14 +20,11 @@ export default function Home() {
          {/* Stats Section */}
          <Stats />
 
-         {/* Packages Section */}
-         <Packages />
-
-         {/* Testimonials Section */}
-         <Testimonials />
-
          {/* Experts Section */}
          <Experts />
+
+         {/* Packages Section */}
+         <Packages />
 
          {/* How Do we work */}
          <HowDoWeWork />
@@ -47,11 +44,14 @@ export default function Home() {
          {/* Works */}
          <Works />
 
-         {/* Vlogs  */}
-         <Vlogs />
+         {/* Testimonials Section */}
+         <Testimonials />
 
          {/* Products */}
          <Products />
+
+         {/* Vlogs  */}
+         <Vlogs />
       </main>
    );
 }

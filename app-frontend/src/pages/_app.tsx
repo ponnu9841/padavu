@@ -6,6 +6,7 @@ import type { AppProps } from "next/app";
 // import store from "@/redux/store";
 // import ReduxWrapper from "@/reduxWrapper";
 import "@/styles/globals.css";
+import Provider from "@/store/provider";
 // import 'react-quill/dist/quill.snow.css';
 // import useSrollRestoration from "@/components/scroll-restoration";
 
@@ -24,7 +25,7 @@ export default function App(props: AppPropsWithLayout) {
 	// useSrollRestoration();
 	return (
 		<>
-			{/* // <Provider store={store}> */}
+			<Provider>
 				{/* <ReduxWrapper> */}
 					{getLayout(
 						// <ThemeProvider
@@ -38,7 +39,7 @@ export default function App(props: AppPropsWithLayout) {
 						// </ThemeProvider>
 					)}
 				{/* // </ReduxWrapper> */}
-			{/* // </Provider> */}
+			</Provider>
 		</>
 	);
 }

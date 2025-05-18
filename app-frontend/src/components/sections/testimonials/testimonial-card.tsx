@@ -20,7 +20,7 @@ Testimonial) {
                className="aspect-square min-h-[300px] max-h-[300px] w-full"
             />
          </ZoomAnimation>
-         <div className="relative col-span-3 text-background/90">
+         <div className="relative col-span-3">
             <div className="text-xl uppercase font-bold mt-4 flex justify-center">
                <AnimateText text={name} />
             </div>

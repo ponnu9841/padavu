@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "@/styles/globals.css";
 import Layout from "@/components/layout";
+import Provider from "@/store/provider";
 
 const font = Noto_Sans_JP({
    subsets: ["latin", "cyrillic"],
@@ -19,10 +20,12 @@ export default function RootLayout({
    children: React.ReactNode;
 }>) {
    return (
-      <html lang="en">
-         <body className={`${font.variable} antialiased`}>
-            <Layout>{children}</Layout>
-         </body>
-      </html>
+      <Provider>
+         <html lang="en">
+            <body className={`${font.variable} antialiased`}>
+               <Layout>{children}</Layout>
+            </body>
+         </html>
+      </Provider>
    );
 }

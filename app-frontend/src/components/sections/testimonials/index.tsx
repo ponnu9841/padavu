@@ -6,9 +6,9 @@ import TestimonialCard from "./testimonial-card";
 
 export default function Testimonials() {
    return (
-      <section className="bg-secondary text-background ">
+      <section>
           <div className="container">
-             <h2 className="text-background pt-5">Testimonials</h2>
+             <h2 className="text-center uppercase pt-5">Testimonials</h2>
              <div className="mt-6">
                 <CarouselSlider
                    id="testimonials-slider"

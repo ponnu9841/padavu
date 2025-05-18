@@ -5,8 +5,8 @@ export default function Vlogs() {
    return (
       <div className="py-10 px-4 max-w-6xl mx-auto">
          <h2 className="mb-3">Vlog</h2>
-         <div className="grid grid-cols-4 gap-3">
-            <div>
+         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 overflow-hidden">
+            <div className="flex flex-col">
                <NextImage
                   src=""
                   className="w-full aspect-2/3 mb-2"
@@ -14,7 +14,7 @@ export default function Vlogs() {
                />
                <h4>Heading</h4>
             </div>
-            <div>
+            <div className="flex flex-col">
                <NextImage
                   src=""
                   className="w-full aspect-2/3 mb-2"
@@ -22,7 +22,7 @@ export default function Vlogs() {
                />
                <h4>Heading</h4>
             </div>
-            <div>
+            <div className="flex flex-col">
                <NextImage
                   src=""
                   className="w-full aspect-2/3 mb-2"
@@ -30,7 +30,7 @@ export default function Vlogs() {
                />
                <h4>Heading</h4>
             </div>
-            <div>
+            <div className="flex flex-col">
                <NextImage
                   src=""
                   className="w-full aspect-2/3 mb-2"

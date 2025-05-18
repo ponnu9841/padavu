@@ -1,3 +1,5 @@
+import AnimatedTypography from "@/components/animation/animated-typography";
+import { RenderElement } from "@/components/render-element";
 import Image from "next/image";
 
 const workSteps = [
@@ -30,9 +32,11 @@ const workSteps = [
 export default function HowDoWeWork() {
    return (
       <section className="my-10 px-4">
-         <h2 className="text-4xl font-bold text-center text-primary mb-10">
-            HOW DO WE WORK
-         </h2>
+         <AnimatedTypography
+            variant="h2"
+            text="HOW DO WE WORK"
+            className="text-4xl font-bold text-center text-primary mb-10"
+         />
 
          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
             {workSteps.map((step, index) => (
@@ -52,9 +56,11 @@ export default function HowDoWeWork() {
                   <div className="text-primary font-semibold mb-1">
                      {index + 1}.
                   </div>
-                  <div className="text-primary text-sm font-medium">
-                     {step.title}
-                  </div>
+                  <RenderElement
+                     title={step.title}
+                     variant="h3"
+                     className="text-primary text-sm font-medium"
+                  />
                </div>
             ))}
          </div>

@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 export default function Works() {
    return (
       <div className="py-10 px-4 max-w-6xl mx-auto">
-         <h2>Completed works</h2>
+         <h2 className="mb-3">Completed works</h2>
          <div className="columns-1 md:columns-3 gap-4">
             {allWorks.map((work, index) => (
                <ZoomAnimation key={index}>

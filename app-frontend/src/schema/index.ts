@@ -77,6 +77,22 @@ export const workSchema = z
       path: ["image"],
    });
 
+export const testimonialSchema = z
+   .object({
+      id: z.string().optional(),
+      image: fileSchema(),
+      imageAlt: z.string().optional(),
+      name: z.string().min(3, "Name must be at least 3 characters"),
+      designation: z.string().optional(),
+      testimonial: z.string().min(10, "Testimonial must be at least 3 characters"),
+   })
+   .refine((data) => (data.id ? true : data.image && data.image.length >= 1), {
+      message: "Image is required",
+      path: ["image"],
+   });
+
+export type TestimonialFormData = z.infer<typeof testimonialSchema>;
+
 export type WorkFormData = z.infer<typeof workSchema>;
 
 export type ClientFormData = z.infer<typeof clientSchema>;

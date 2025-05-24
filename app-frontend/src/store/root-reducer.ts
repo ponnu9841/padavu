@@ -6,8 +6,9 @@ import bannersSliceReducer from "./features/banner-slice";
 import packagesSliceReducer from "./features/packages-slice";
 import clientsSliceReducer from "./features/clients-slice";
 import worksSliceReducer from "./features/works-slice";
+import testimonialsSliceReducer from "./features/testimonial-slice";
 
-export const LOGOUT = 'LOGOUT';
+export const LOGOUT = "LOGOUT";
 
 const appReducer = combineReducers({
    user: userSliceReducer,
@@ -15,9 +16,13 @@ const appReducer = combineReducers({
    packages: packagesSliceReducer,
    clients: clientsSliceReducer,
    works: worksSliceReducer,
+   testimonials: testimonialsSliceReducer,
 });
 
-const rootReducer = (state: ReturnType<typeof appReducer> | undefined, action: Action) => {
+const rootReducer = (
+   state: ReturnType<typeof appReducer> | undefined,
+   action: Action
+) => {
    if (action.type === LOGOUT) {
       state = undefined; // resets entire state
    }

@@ -2,7 +2,7 @@ import {
   FaHome,
   FaHandshake,
   // FaCogs,
-  // FaComments,
+  FaComments,
   FaImages,
   // FaUsers,
   // FaAddressBook,
@@ -55,11 +55,11 @@ const items = [
   //   url: "/dashboard/services",
   //   icon: FaCogs,
   // },
-  // {
-  //   title: "Testimonials",
-  //   url: "/dashboard/testimonials",
-  //   icon: FaComments,
-  // },
+  {
+    title: "Testimonials",
+    url: "/dashboard/testimonials",
+    icon: FaComments,
+  },
   {
     title: "Works",
     url: "/dashboard/works",

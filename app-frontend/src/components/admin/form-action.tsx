@@ -26,6 +26,7 @@ export default function FormAction({
                variant="destructive"
                onClick={resetForm}
                size={size}
+               disabled={loading}
             >
                Reset
             </Button>

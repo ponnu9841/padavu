@@ -77,3 +77,16 @@ model Work {
 
   @@map("works")
 }
+
+model Testimonial {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(255)
+  image       String?  @db.VarChar(255)
+  alt         String?  @db.VarChar(255)
+  designation String?  @db.VarChar(255)
+  testimonial String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("testimonials")
+}

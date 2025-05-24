@@ -94,7 +94,7 @@ router.post("/login", async (req: Request, res: Response) => {
 });
 
 router.get(
-   "/user",
+   "/",
    authenticateJWT,
    async (req: AuthRequest, res: Response) => {
       res.status(200).json({ data: req.user });

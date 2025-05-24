@@ -29,3 +29,51 @@ model User {
 
   @@map("users")
 }
+
+model Banner {
+  id          String   @id @default(uuid())
+  image       String   @db.VarChar(255)
+  alt         String?  @db.VarChar(255)
+  title       String?  @db.VarChar(255)
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("banners")
+}
+
+model Package {
+  id               String   @id @default(uuid())
+  image            String   @db.VarChar(255)
+  alt              String?  @db.VarChar(255)
+  title            String   @db.VarChar(255)
+  description      String
+  long_description String?
+  price            String   @db.VarChar(255)
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("packages")
+}
+
+model Client {
+  id        String   @id @default(uuid())
+  image     String   @db.VarChar(255)
+  alt       String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("clients")
+}
+
+model Work {
+  id          String   @id @default(uuid())
+  image       String   @db.VarChar(255)
+  alt         String?  @db.VarChar(255)
+  title       String?  @db.VarChar(255)
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("works")
+}

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import NavigationMenu from "./navigation-menu";
+import NextImage from "@/components/Image";
 
 export default function Layout({ children }: { children: ReactNode }) {
    return (
@@ -7,8 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
          <header className="bg-primary text-background p-4 sticky top-0 z-10 shadow h-25 flex items-center">
             <div className="container flex justify-between items-center">
                <div className="text-2xl font-bold">
-                  <h1 className="text-4xl">PADAVU</h1>
-                  <p className="text-sm">INTERIOR SOLUTIONS</p>
+                  <NextImage src="/images/logo.webp" className="aspect-[3/1] w-50 max-h-25" />
                </div>
                <NavigationMenu />
             </div>

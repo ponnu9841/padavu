@@ -15,6 +15,6 @@ export const handleToast = (message: string) => {
 			actionButton: "absolute top-2 right-2",
 			cancelButton: "absolute top-2 right-2",
 		},
-		icon: <IoCloseCircleOutline size={28} className="mt-4" />,
+		icon: <IoCloseCircleOutline size={28} />,
 	});
 };

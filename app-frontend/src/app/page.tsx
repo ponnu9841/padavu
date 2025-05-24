@@ -11,11 +11,14 @@ import Testimonials from "@/components/sections/testimonials";
 import Vision from "@/components/sections/vision";
 import Vlogs from "@/components/sections/vlog";
 import Works from "@/components/sections/works";
+import { getBannersResponse } from "@/lib/get-data";
 
-export default function Home() {
+const Home = async () => {
+   const bannerData: Banner[] = await getBannersResponse();
+
    return (
       <main className="min-h-screen">
-         <Hero />
+         <Hero banners={bannerData} />
 
          {/* Stats Section */}
          <Stats />
@@ -54,4 +57,6 @@ export default function Home() {
          <Vlogs />
       </main>
    );
-}
+};
+
+export default Home;

@@ -1,11 +1,10 @@
 import CarouselSlider from "@/components/carousel";
-import { heroData } from "@/lib/constants";
 import React from "react";
 
-export default function Hero() {
+export default function Hero({ banners }: { banners: Banner[] }) {
    return (
       <CarouselSlider
-         images={heroData}
+         images={banners}
          cardContentClassName="min-h-[70vh] lg:min-h-[80vh] xl:min-h-screen"
          id="home-slider"
          showTitle

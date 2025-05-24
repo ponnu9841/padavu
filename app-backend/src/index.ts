@@ -1,18 +1,20 @@
-import express, { Request, Response, type Express } from "express";
+import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import Deploy from "./routes/deploy"
-import User from "./routes/user"
+import Deploy from "./routes/deploy";
+import User from "./routes/user";
+import Banner from "./routes/banner";
+import Package from "./routes/package";
+import Client from "./routes/client";
+import Work from "./routes/work";
 
 dotenv.config();
-const app: Express = express();
+const app = express();
 const PORT = process.env.PORT ?? 8000;
 app.use(
    cors({
       origin: function (origin, callback) {
-         const allowedOrigins = [
-            "http://localhost:3000",
-         ];
+         const allowedOrigins = ["http://localhost:3000"];
          if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
          } else {
@@ -41,9 +43,15 @@ app.get("/health", (req, res) => {
    res.send("Hello World!");
 });
 
-app.use("/api/deploy", Deploy)
-app.use("/api/user", User)
+app.use("/api/deploy", Deploy);
+app.use("/api/user", User);
+app.use("/api/banners", Banner);
+app.use("/api/packages", Package);
+app.use("/api/clients", Client);
+app.use("/api/works", Work);
 
-app.listen(PORT, () => console.log(`🚀 Server is running at http://localhost:${PORT}`));
+app.listen(PORT, () =>
+   console.log(`🚀 Server is running at http://localhost:${PORT}`)
+);
 
 module.exports = app;

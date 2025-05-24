@@ -41,7 +41,7 @@ export default function Login() {
 	const onSubmit = async (data: LoginFormData) => {
 		setLoading(true);
 		try {
-			const response = await axiosInstance.post("/login", data);
+			const response = await axiosInstance.post("/user/login", data);
 			if (response.status === 200) {
 				const { token } = response.data;
 				if (token) setToken(token);

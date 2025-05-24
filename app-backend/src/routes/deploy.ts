@@ -1,10 +1,11 @@
 import { execFile, spawn } from "child_process";
 import { Router } from "express";
 import path from "path";
+import { authenticateJWT } from "../utils/auth-middleware";
 
 const router = Router();
 
-router.get("/", (req: any, res: any, next: any) => {
+router.get("/", authenticateJWT, (req: any, res: any, next: any) => {
    try {
       const projectPath = process.env.PROJECT_PATH;
       const appName = process.env.APP_NAME;

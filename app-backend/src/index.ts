@@ -8,6 +8,7 @@ import Package from "./routes/package";
 import Client from "./routes/client";
 import Work from "./routes/work";
 import Testimonial from "./routes/testimonial";
+import Experts from "./routes/experts";
 
 dotenv.config();
 const app = express();
@@ -51,6 +52,7 @@ app.use("/api/packages", Package);
 app.use("/api/clients", Client);
 app.use("/api/works", Work);
 app.use("/api/testimonials", Testimonial);
+app.use("/api/experts", Experts);
 
 app.listen(PORT, () =>
    console.log(`🚀 Server is running at http://localhost:${PORT}`)

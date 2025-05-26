@@ -46,7 +46,7 @@ export default function BlogsForm() {
       const form = new FormData();
       form.append("title", data.title);
       form.append("content", data.content);
-      form.append("imageAlt", data.imageAlt || "");
+      form.append("alt", data.imageAlt || "");
       form.append("existingImage", existingImage || "");
       if (data.image.length > 0) {
          form.append("image", data.image[0]);

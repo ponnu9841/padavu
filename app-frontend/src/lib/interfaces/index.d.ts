@@ -121,3 +121,18 @@ type Blog = {
 type BlogResponse = PaginationResponse & {
    data: Blog[] | [];
 }
+
+type About = {
+   id: string;
+   image: string;
+   alt: string | null;
+   short_description: string;
+   long_description: string | null;
+}
+
+type Mission = {
+   id: string;
+   image: string;
+   alt: string | null;
+   description: string;
+};

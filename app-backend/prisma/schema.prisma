@@ -104,10 +104,10 @@ model Experts {
 }
 
 model Product {
-  id          String  @id @default(uuid())
-  image       String  @db.VarChar(255)
-  alt         String? @db.VarChar(255)
-  title       String  @db.VarChar(255)
+  id          String   @id @default(uuid())
+  image       String   @db.VarChar(255)
+  alt         String?  @db.VarChar(255)
+  title       String   @db.VarChar(255)
   description String?
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
@@ -125,4 +125,38 @@ model Blog {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("blogs")
+}
+
+model About {
+  id                String   @id @default(uuid())
+  image             String   @db.VarChar(255)
+  alt               String   @db.VarChar(255)
+  short_description String
+  long_description  String?
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  @@map("about")
+}
+
+model Mission {
+  id          String   @id @default(uuid())
+  image       String   @db.VarChar(255)
+  alt         String   @db.VarChar(255)
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("mission")
+}
+
+model Vision {
+  id          String   @id @default(uuid())
+  image       String   @db.VarChar(255)
+  alt         String   @db.VarChar(255)
+  description String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("vision")
 }

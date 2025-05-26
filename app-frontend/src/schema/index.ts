@@ -154,6 +154,39 @@ export const blogSchema = z
       path: requireImageIfNoId.path,
    });
 
+export const aboutSchema = z
+   .object({
+      id: z.string().optional(),
+      image: fileSchema(),
+      imageAlt: z.string().optional(),
+      shortDescription: z
+         .string()
+         .min(10, "Content must be at least 3 characters"),
+      longDescription: z.string().optional(),
+   })
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
+   });
+
+export const missionSchema = z
+   .object({
+      id: z.string().optional(),
+      image: fileSchema(),
+      imageAlt: z.string().optional(),
+      description: z.string().min(10, "Content must be at least 3 characters"),
+   })
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
+   });
+
+export type VissionFormData = z.infer<typeof missionSchema>;
+
+export type MissionFormData = z.infer<typeof missionSchema>;
+
+export type AboutFormData = z.infer<typeof aboutSchema>;
+
 export type BlogFormData = z.infer<typeof blogSchema>;
 
 export type ProductsFormData = z.infer<typeof productSchema>;

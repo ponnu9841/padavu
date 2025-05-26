@@ -64,7 +64,7 @@ type Banner = {
    description?: string;
 };
 
-type Package = {
+type PackagesData = {
    id: string;
    title: string;
    description: string;
@@ -90,4 +90,20 @@ type Work = {
 
 type WorksResponse = PaginationResponse & {
    data: Work[] | [];
+};
+
+type Experts = {
+   id: string;
+   image: string;
+   alt: string | null;
+   title: string;
+   description: string;
+};
+
+type Product = {
+   id: string;
+   image: string;
+   alt: string | null;
+   title: string;
+   description: string | null;
 };

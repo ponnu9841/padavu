@@ -1,22 +1,40 @@
 import { z } from "zod";
 
-export const fileSchema = (
-   minFiles = 1,
-   maxFiles = 10,
-   errorMessage = "Invalid file"
-) =>
-   z
-      .array(
-         z.custom<ExtendedFile>(
-            (file) =>
-               file instanceof File &&
-               "url" in file &&
-               typeof (file as ExtendedFile).url === "string",
-            { message: errorMessage }
-         )
+const requireImageIfNoId = {
+   message: "Image is required",
+   path: ["image"],
+   condition: (data: { id?: string; image?: ExtendedFile[] }) =>
+      !!data.id?.trim() || (data.image?.length ?? 0) >= 1,
+};
+
+export const fileSchema = (errorMessage = "Invalid Image") =>
+   z.array(
+      z.custom<ExtendedFile>(
+         (file) =>
+            file instanceof File &&
+            "url" in file &&
+            typeof (file as ExtendedFile).url === "string",
+         { message: errorMessage }
       )
-      .min(minFiles, "Image is required")
-      .max(maxFiles, `You can upload up to ${maxFiles} files`);
+   );
+
+// export const fileSchema = (
+//    minFiles = 1,
+//    maxFiles = 10,
+//    errorMessage = "Invalid file"
+// ) =>
+//    z
+//       .array(
+//          z.custom<ExtendedFile>(
+//             (file) =>
+//                file instanceof File &&
+//                "url" in file &&
+//                typeof (file as ExtendedFile).url === "string",
+//             { message: errorMessage }
+//          )
+//       )
+//       .min(minFiles, "Image is required")
+//       .max(maxFiles, `You can upload up to ${maxFiles} files`);
 
 export const loginSchema = z.object({
    email: z.string().email("Invalid email address"),
@@ -31,9 +49,9 @@ export const bannerSchema = z
       title: z.string().optional(),
       description: z.string().optional(),
    })
-   .refine((data) => (data.id ? true : data.image && data.image.length >= 1), {
-      message: "Image is required",
-      path: ["image"],
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
    });
 
 export const packageSchema = z
@@ -48,9 +66,9 @@ export const packageSchema = z
       longDescription: z.string().optional(),
       price: z.string().min(1, "Price is required"),
    })
-   .refine((data) => (data.id ? true : data.image && data.image.length >= 1), {
-      message: "Image is required",
-      path: ["image"],
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
    });
 
 export const clientSchema = z
@@ -59,9 +77,9 @@ export const clientSchema = z
       image: fileSchema(),
       imageAlt: z.string().optional(),
    })
-   .refine((data) => (data.id ? true : data.image && data.image.length >= 1), {
-      message: "Image is required",
-      path: ["image"],
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
    });
 
 export const workSchema = z
@@ -72,9 +90,9 @@ export const workSchema = z
       title: z.string().optional(),
       description: z.string().optional(),
    })
-   .refine((data) => (data.id ? true : data.image && data.image.length >= 1), {
-      message: "Image is required",
-      path: ["image"],
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
    });
 
 export const testimonialSchema = z
@@ -84,12 +102,48 @@ export const testimonialSchema = z
       imageAlt: z.string().optional(),
       name: z.string().min(3, "Name must be at least 3 characters"),
       designation: z.string().optional(),
-      testimonial: z.string().min(10, "Testimonial must be at least 3 characters"),
+      testimonial: z
+         .string()
+         .min(10, "Testimonial must be at least 3 characters"),
    })
-   .refine((data) => (data.id ? true : data.image && data.image.length >= 1), {
-      message: "Image is required",
-      path: ["image"],
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
    });
+
+export const expertsSchema = z
+   .object({
+      id: z.string().optional(),
+      image: fileSchema().optional(),
+      imageAlt: z.string().optional(),
+      title: z.string().min(3, "Title must be at least 3 characters"),
+      description: z
+         .string()
+         .min(10, "Description must be at least 3 characters"),
+   })
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
+   });
+
+export const productSchema = z
+   .object({
+      id: z.string().optional(),
+      image: fileSchema(),
+      imageAlt: z.string().optional(),
+      title: z.string().min(3, "Title must be at least 3 characters"),
+      description: z
+         .string()
+         .min(10, "Description must be at least 3 characters"),
+   })
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
+   });
+
+export type ProductsFormData = z.infer<typeof productSchema>;
+
+export type ExpertsFormData = z.infer<typeof expertsSchema>;
 
 export type TestimonialFormData = z.infer<typeof testimonialSchema>;
 

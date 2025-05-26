@@ -1,7 +1,7 @@
 import {
   FaHome,
   FaHandshake,
-  // FaCogs,
+  FaCogs,
   FaComments,
   FaImages,
   // FaUsers,
@@ -9,7 +9,7 @@ import {
   FaInfoCircle,
   // FaThList,
   // FaBlog,
-  // FaBriefcase
+  FaBriefcase
 } from "react-icons/fa";
 import { NavUser } from "./nav-user";
 import { Logo } from "./logo";
@@ -50,11 +50,11 @@ const items = [
     url: "/dashboard/clients",
     icon: FaHandshake,
   },
-  // {
-  //   title: "Services",
-  //   url: "/dashboard/services",
-  //   icon: FaCogs,
-  // },
+  {
+    title: "Products",
+    url: "/dashboard/products",
+    icon: FaCogs,
+  },
   {
     title: "Testimonials",
     url: "/dashboard/testimonials",
@@ -80,11 +80,11 @@ const items = [
   //   url: "/dashboard/blog",
   //   icon: FaBlog,
   // },
-  // {
-  //   title: "Career",
-  //   url: "/dashboard/career",
-  //   icon: FaBriefcase,
-  // },
+  {
+    title: "Experts",
+    url: "/dashboard/experts",
+    icon: FaBriefcase,
+  },
   // {
   //   title: "Miscellaneous",
   //   url: "/dashboard/miscellaneous",

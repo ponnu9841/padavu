@@ -7,22 +7,21 @@ import { deleteRecord } from "../utils/delete-request";
 import { errorHandler } from "../utils/error-handler";
 
 const router = Router();
-const uploadMiddleware = upload("experts");
+const uploadMiddleware = upload("products");
 
 router.get("/", async (req, res) => {
    try {
-      const testimonials = await prisma.experts.findMany({
+      const data = await prisma.product.findMany({
          orderBy: { createdAt: "desc" },
          select: {
             id: true,
-            title: true,
             image: true,
             alt: true,
             description: true,
          },
       });
       res.status(200).json({
-         data: testimonials,
+         data,
       });
    } catch (error) {
       errorHandler(error as Error, req, res);
@@ -38,16 +37,16 @@ router.post(
          const filePath = req.file && extractFilePath(req.file);
          const data = req.body;
          const reqBody = {
-            image: filePath,
-            alt: data.alt || "",
+            image: filePath || "",
             title: data.title,
-            description: data.description || "",
+            alt: data.alt || "",
+            description: data.description,
          };
-         const experts = await prisma.experts.create({
+         const testimonial = await prisma.product.create({
             data: reqBody,
          });
 
-         res.status(200).json({ data: experts });
+         res.status(200).json({ data: testimonial });
       } catch (error) {
          errorHandler(error as Error, req, res);
       }
@@ -62,20 +61,20 @@ router.put(
       try {
          const data = req.body;
          const reqBody: ReqBody = {
-            alt: data.alt || "",
             title: data.title,
-            description: data.description || "",
+            alt: data.alt || "",
+            description: data.description,
          };
          if (req.file) {
             reqBody["image"] = extractFilePath(req.file);
             deleteFileFromUrl(data.existingImage);
          }
 
-         const experts = await prisma.experts.update({
+         const testimonial = await prisma.product.update({
             where: { id: data.id },
             data: reqBody,
          });
-         res.status(200).json({ data: experts });
+         res.status(200).json({ data: testimonial });
       } catch (error) {
          errorHandler(error as Error, req, res);
       }
@@ -83,7 +82,7 @@ router.put(
 );
 
 router.delete("/", authenticateJWT, async (req, res) => {
-   deleteRecord(req, res, "experts", false);
+   deleteRecord(req, res, "product", false);
 });
 
 export default router;

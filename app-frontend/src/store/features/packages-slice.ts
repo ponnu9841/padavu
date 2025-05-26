@@ -3,9 +3,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState: {
 	loading: boolean;
-	data: Package[];
+	data: PackagesData[];
 	error: string;
-	selectedPackage: Package | null;
+	selectedPackage: PackagesData | null;
 } = {
 	loading: true,
 	data: [],

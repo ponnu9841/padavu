@@ -1,7 +1,7 @@
 import Package from "@/components/admin/packages";
 import DashBoardLayout from "@/components/layout/dashboard/dashboard-layout";
 
-export default function Home() {
+export default function PackagesPage() {
    return (
       <div>
          <h2 className="text-lg">Packages</h2>
@@ -10,6 +10,6 @@ export default function Home() {
    );
 }
 
-Home.getLayout = function getLayout(page: React.ReactElement) {
+PackagesPage.getLayout = function getLayout(page: React.ReactElement) {
    return <DashBoardLayout>{page}</DashBoardLayout>;
 };

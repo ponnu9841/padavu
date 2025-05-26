@@ -1,11 +1,10 @@
 import axiosInstance from "@/lib/axios";
 import { Input } from "@/components/ui/input";
-import { fetchWork } from "@/store/features/works-slice";
-import { WorkFormData, workSchema } from "@/schema";
+import { ExpertsFormData, expertsSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import FormAction from "../form-action";
+import FormAction from "@/components/admin/form-action";
 import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
 import {
    Form,
@@ -16,18 +15,23 @@ import {
    FormMessage,
 } from "@/components/ui/form";
 import FileUpload from "@/components/file-upload";
+import {
+   fetchExperts,
+   setSelectedExpert,
+} from "@/store/features/experts-slice";
+import TextEditor from "@/components/text-editor";
 
 const defaultValues = {
    id: "",
    image: [],
-   alt: "",
+   imageAlt: "",
    title: "",
    description: "",
 };
 
-export default function GalleryForm() {
-   const form = useForm<WorkFormData>({
-      resolver: zodResolver(workSchema),
+export default function ClientsForm() {
+   const form = useForm<ExpertsFormData>({
+      resolver: zodResolver(expertsSchema),
       defaultValues,
    });
 
@@ -35,56 +39,59 @@ export default function GalleryForm() {
    const [loading, setLoading] = useState(false);
 
    const dispatch = useAppDispatch();
-   const pageNo = useAppSelector((state) => state.works.pageNo);
-   const selectedWork = useAppSelector((state) => state.works.selectedWork);
+   const selectedExpert = useAppSelector(
+      (state) => state.experts.selectedExpert
+   );
 
    const resetForm = () => {
       form.reset(defaultValues);
       setExistingImage("");
+      dispatch(setSelectedExpert(null));
    };
 
-   const onSubmit = (data: WorkFormData) => {
+   const onSubmit = (data: ExpertsFormData) => {
       setLoading(true);
       const formData = new FormData();
+      formData.append("title", data.title);
+      formData.append("description", data.description);
       formData.append("alt", data.imageAlt || "");
-      formData.append("title", data.title || "");
-      formData.append("description", data.description || "");
       formData.append("existingImage", existingImage);
-      if (data.id) {
-         formData.append("id", data.id);
-      }
-      if (data.image.length > 0) {
+      if (data.image && data.image.length > 0) {
          formData.append("image", data.image[0]);
       }
+      if (data.id) formData.append("id", data.id);
       const method = data.id ? axiosInstance.put : axiosInstance.post;
-      method("/works", formData)
+      method("/experts", formData)
          .then((response) => {
             if (response.status === 200) {
                resetForm();
-               dispatch(fetchWork({ pageNo }));
+               dispatch(fetchExperts());
             }
+         })
+         .catch((error) => {
+            console.log(error);
          })
          .finally(() => setLoading(false));
    };
 
    useEffect(() => {
-      if (selectedWork) {
+      if (selectedExpert) {
          form.reset({
-            id: selectedWork.id,
+            id: selectedExpert.id,
             image: [],
-            imageAlt: selectedWork.alt || "",
-            title: selectedWork.title || "",
-            description: selectedWork.description || "",
+            imageAlt: selectedExpert.alt || "",
+            title: selectedExpert.title,
+            description: selectedExpert.description,
          });
-         setExistingImage(selectedWork.image);
+         setExistingImage(selectedExpert.image);
       }
-   }, [selectedWork]); //eslint-disable-line
+   }, [selectedExpert]); // eslint-disable-line
 
    return (
       <Form {...form}>
          <form onSubmit={form.handleSubmit(onSubmit)}>
             <input type="hidden" {...form.register("id")} />
-            <div className="mt-4">
+            <div className="space-y-4 mt-4">
                <FormField
                   control={form.control}
                   name="image"
@@ -104,25 +111,19 @@ export default function GalleryForm() {
                      </FormItem>
                   )}
                />
-            </div>
-            {form.watch("image").length > 0 && (
-               <div className="my-4">
-                  <FormField
-                     control={form.control}
-                     name="imageAlt"
-                     render={({ field }) => (
-                        <FormItem>
-                           <FormLabel>Image Alt</FormLabel>
-                           <FormControl>
-                              <Input {...field} placeholder="Image alt" />
-                           </FormControl>
-                           <FormMessage />
-                        </FormItem>
-                     )}
-                  />
-               </div>
-            )}
-            <div className="my-4">
+               <FormField
+                  control={form.control}
+                  name="imageAlt"
+                  render={({ field }) => (
+                     <FormItem>
+                        <FormLabel>Image Alt</FormLabel>
+                        <FormControl>
+                           <Input {...field} placeholder="Image Alt" />
+                        </FormControl>
+                        <FormMessage />
+                     </FormItem>
+                  )}
+               />
                <FormField
                   control={form.control}
                   name="title"
@@ -136,23 +137,26 @@ export default function GalleryForm() {
                      </FormItem>
                   )}
                />
-            </div>
-            <div className="my-4">
                <FormField
                   control={form.control}
                   name="description"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                      <FormItem>
                         <FormLabel>Description</FormLabel>
                         <FormControl>
-                           <Input {...field} placeholder="Description" />
+                           <TextEditor
+                              placeholder="Enter description"
+                              value={field.value}
+                              setValue={field.onChange}
+                              error={error?.message}
+                           />
                         </FormControl>
                         <FormMessage />
                      </FormItem>
                   )}
                />
             </div>
-            <FormAction loading={loading} reset={() => resetForm()} />
+            <FormAction reset={resetForm} loading={loading} />
          </form>
       </Form>
    );

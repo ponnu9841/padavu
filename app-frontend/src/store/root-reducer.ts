@@ -7,6 +7,8 @@ import packagesSliceReducer from "./features/packages-slice";
 import clientsSliceReducer from "./features/clients-slice";
 import worksSliceReducer from "./features/works-slice";
 import testimonialsSliceReducer from "./features/testimonial-slice";
+import expertsSliceReducer from "./features/experts-slice";
+import productsSliceReducer from "./features/products-slice";
 
 export const LOGOUT = "LOGOUT";
 
@@ -17,6 +19,8 @@ const appReducer = combineReducers({
    clients: clientsSliceReducer,
    works: worksSliceReducer,
    testimonials: testimonialsSliceReducer,
+   experts: expertsSliceReducer,
+   products: productsSliceReducer,
 });
 
 const rootReducer = (

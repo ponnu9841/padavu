@@ -2,12 +2,10 @@ import NextImage from "@/components/Image";
 import { useAppSelector, useAppDispatch } from "@/hooks/use-store";
 import { DeleteDrawer } from "@/components/admin/delete-drawer";
 import axiosInstance from "@/lib/axios";
-import {
-   fetchPackage,
-   setSelectedPackage,
-} from "@/store/features/packages-slice";
+import { setSelectedPackage } from "@/store/features/packages-slice";
 import parse from "html-react-parser";
 import EditButton from "../edit-button";
+import { fetchProducts } from "@/store/features/products-slice";
 
 export default function BannerData() {
    const dispatch = useAppDispatch();
@@ -15,11 +13,11 @@ export default function BannerData() {
 
    const deleteBanner = async (id: string, image: string) => {
       try {
-         const response = await axiosInstance.delete(`/packages`, {
+         const response = await axiosInstance.delete(`/products`, {
             params: { id, image },
          });
          if (response.status === 200) {
-            dispatch(fetchPackage());
+            dispatch(fetchProducts());
          }
       } catch (error) {
          console.error("Error deleting banner:", error);

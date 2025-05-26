@@ -1,12 +1,11 @@
 import axiosInstance from "@/lib/axios";
 import { Input } from "@/components/ui/input";
-import { fetchWork } from "@/store/features/works-slice";
-import { WorkFormData, workSchema } from "@/schema";
+import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
+import { productSchema, ProductsFormData } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import FormAction from "../form-action";
-import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
 import {
    Form,
    FormControl,
@@ -16,75 +15,79 @@ import {
    FormMessage,
 } from "@/components/ui/form";
 import FileUpload from "@/components/file-upload";
+import TextEditor from "@/components/text-editor";
+import {
+   fetchProducts,
+   setSelectedProduct,
+} from "@/store/features/products-slice";
 
 const defaultValues = {
    id: "",
    image: [],
-   alt: "",
+   imageAlt: "",
    title: "",
    description: "",
 };
 
-export default function GalleryForm() {
-   const form = useForm<WorkFormData>({
-      resolver: zodResolver(workSchema),
+export default function ProductsForm() {
+   const form = useForm<ProductsFormData>({
+      resolver: zodResolver(productSchema),
       defaultValues,
    });
 
-   const [existingImage, setExistingImage] = useState("");
-   const [loading, setLoading] = useState(false);
-
    const dispatch = useAppDispatch();
-   const pageNo = useAppSelector((state) => state.works.pageNo);
-   const selectedWork = useAppSelector((state) => state.works.selectedWork);
+   const selectedPackage = useAppSelector(
+      (state) => state.packages.selectedPackage
+   );
+   const [loading, setLoading] = useState(false);
+   const [existingImage, setExistingImage] = useState("");
 
-   const resetForm = () => {
-      form.reset(defaultValues);
-      setExistingImage("");
-   };
-
-   const onSubmit = (data: WorkFormData) => {
+   const onSubmit = (data: ProductsFormData) => {
       setLoading(true);
-      const formData = new FormData();
-      formData.append("alt", data.imageAlt || "");
-      formData.append("title", data.title || "");
-      formData.append("description", data.description || "");
-      formData.append("existingImage", existingImage);
-      if (data.id) {
-         formData.append("id", data.id);
-      }
+      const form = new FormData();
+      form.append("alt", data.imageAlt || "");
+      form.append("title", data.title || "");
+      form.append("description", data.description || "");
+      form.append("existingImage", existingImage);
       if (data.image.length > 0) {
-         formData.append("image", data.image[0]);
+         form.append("image", data.image[0]);
       }
+      if (data.id) form.append("id", data.id);
       const method = data.id ? axiosInstance.put : axiosInstance.post;
-      method("/works", formData)
+      method("/products", form)
          .then((response) => {
             if (response.status === 200) {
+               dispatch(fetchProducts());
                resetForm();
-               dispatch(fetchWork({ pageNo }));
             }
          })
          .finally(() => setLoading(false));
    };
 
+   const resetForm = () => {
+      form.reset(defaultValues);
+      setExistingImage("");
+      dispatch(setSelectedProduct(null));
+   };
+
    useEffect(() => {
-      if (selectedWork) {
+      if (selectedPackage) {
          form.reset({
-            id: selectedWork.id,
+            id: selectedPackage.id,
             image: [],
-            imageAlt: selectedWork.alt || "",
-            title: selectedWork.title || "",
-            description: selectedWork.description || "",
+            imageAlt: selectedPackage.alt || "",
+            title: selectedPackage.title,
+            description: selectedPackage.description || "",
          });
-         setExistingImage(selectedWork.image);
+         setExistingImage(selectedPackage.image);
       }
-   }, [selectedWork]); //eslint-disable-line
+   }, [selectedPackage]); //eslint-disable-line
 
    return (
       <Form {...form}>
          <form onSubmit={form.handleSubmit(onSubmit)}>
             <input type="hidden" {...form.register("id")} />
-            <div className="mt-4">
+            <div className="space-y-4 mt-4">
                <FormField
                   control={form.control}
                   name="image"
@@ -93,7 +96,7 @@ export default function GalleryForm() {
                         <FormLabel>Image</FormLabel>
                         <FormControl>
                            <FileUpload
-                              files={field.value || []}
+                              files={field.value}
                               setFiles={field.onChange}
                               placeholder="Select Image"
                               existingImage={existingImage}
@@ -104,25 +107,23 @@ export default function GalleryForm() {
                      </FormItem>
                   )}
                />
-            </div>
-            {form.watch("image").length > 0 && (
-               <div className="my-4">
-                  <FormField
-                     control={form.control}
-                     name="imageAlt"
-                     render={({ field }) => (
-                        <FormItem>
-                           <FormLabel>Image Alt</FormLabel>
-                           <FormControl>
-                              <Input {...field} placeholder="Image alt" />
-                           </FormControl>
-                           <FormMessage />
-                        </FormItem>
-                     )}
-                  />
-               </div>
-            )}
-            <div className="my-4">
+               <FormField
+                  control={form.control}
+                  name="imageAlt"
+                  render={({ field }) => (
+                     <FormItem>
+                        <FormLabel>Image Alt</FormLabel>
+                        <FormControl>
+                           <Input
+                              {...field}
+                              type="text"
+                              placeholder="Image Alt"
+                           />
+                        </FormControl>
+                        <FormMessage />
+                     </FormItem>
+                  )}
+               />
                <FormField
                   control={form.control}
                   name="title"
@@ -130,29 +131,32 @@ export default function GalleryForm() {
                      <FormItem>
                         <FormLabel>Title</FormLabel>
                         <FormControl>
-                           <Input {...field} placeholder="Title" />
+                           <Input {...field} placeholder="Enter Title" />
                         </FormControl>
                         <FormMessage />
                      </FormItem>
                   )}
                />
-            </div>
-            <div className="my-4">
                <FormField
                   control={form.control}
                   name="description"
-                  render={({ field }) => (
+                  render={({ field, fieldState: { error } }) => (
                      <FormItem>
                         <FormLabel>Description</FormLabel>
                         <FormControl>
-                           <Input {...field} placeholder="Description" />
+                           <TextEditor
+                              placeholder="Enter description"
+                              value={field.value}
+                              setValue={field.onChange}
+                              error={error?.message}
+                           />
                         </FormControl>
                         <FormMessage />
                      </FormItem>
                   )}
                />
             </div>
-            <FormAction loading={loading} reset={() => resetForm()} />
+            <FormAction reset={resetForm} loading={loading} />
          </form>
       </Form>
    );

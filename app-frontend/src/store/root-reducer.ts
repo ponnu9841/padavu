@@ -9,6 +9,7 @@ import worksSliceReducer from "./features/works-slice";
 import testimonialsSliceReducer from "./features/testimonial-slice";
 import expertsSliceReducer from "./features/experts-slice";
 import productsSliceReducer from "./features/products-slice";
+import blogsSliceReducer from "./features/blogs-slice";
 
 export const LOGOUT = "LOGOUT";
 
@@ -21,6 +22,7 @@ const appReducer = combineReducers({
    testimonials: testimonialsSliceReducer,
    experts: expertsSliceReducer,
    products: productsSliceReducer,
+   blogs: blogsSliceReducer,
 });
 
 const rootReducer = (

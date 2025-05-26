@@ -1,11 +1,11 @@
 import axiosInstance from "@/lib/axios";
 import { Input } from "@/components/ui/input";
-import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
-import { productSchema, ProductsFormData } from "@/schema";
+import { fetchBlogs } from "@/store/features/blogs-slice";
+import { BlogFormData, blogSchema } from "@/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import FormAction from "../form-action";
+import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
 import {
    Form,
    FormControl,
@@ -15,73 +15,79 @@ import {
    FormMessage,
 } from "@/components/ui/form";
 import FileUpload from "@/components/file-upload";
+import { useForm } from "react-hook-form";
 import TextEditor from "@/components/text-editor";
-import {
-   fetchProducts,
-   setSelectedProduct,
-} from "@/store/features/products-slice";
 
 const defaultValues = {
    id: "",
    image: [],
-   imageAlt: "",
    title: "",
-   description: "",
+   content: "",
 };
 
-export default function ProductsForm() {
-   const form = useForm<ProductsFormData>({
-      resolver: zodResolver(productSchema),
+export default function BlogsForm() {
+   const form = useForm<BlogFormData>({
+      resolver: zodResolver(blogSchema),
       defaultValues,
    });
 
    const dispatch = useAppDispatch();
-   const selectedProduct = useAppSelector(
-      (state) => state.products.selectedProduct
-   );
-   const [loading, setLoading] = useState(false);
    const [existingImage, setExistingImage] = useState("");
-
-   const onSubmit = (data: ProductsFormData) => {
-      setLoading(true);
-      const form = new FormData();
-      form.append("alt", data.imageAlt || "");
-      form.append("title", data.title || "");
-      form.append("description", data.description || "");
-      form.append("existingImage", existingImage);
-      if (data.image.length > 0) {
-         form.append("image", data.image[0]);
-      }
-      if (data.id) form.append("id", data.id);
-      const method = data.id ? axiosInstance.put : axiosInstance.post;
-      method("/products", form)
-         .then((response) => {
-            if (response.status === 200) {
-               dispatch(fetchProducts());
-               resetForm();
-            }
-         })
-         .finally(() => setLoading(false));
-   };
+   const [loading, setLoading] = useState(false);
+   const selectedBlog = useAppSelector((state) => state.blogs.selectedBlog);
 
    const resetForm = () => {
       form.reset(defaultValues);
       setExistingImage("");
-      dispatch(setSelectedProduct(null));
+   };
+
+   const onSubmit = (data: BlogFormData) => {
+      setLoading(true);
+      const form = new FormData();
+      form.append("title", data.title);
+      form.append("content", data.content);
+      form.append("imageAlt", data.imageAlt || "");
+      form.append("existingImage", existingImage || "");
+      if (data.image.length > 0) {
+         form.append("image", data.image[0]);
+      }
+      if (data.imageAlt) {
+         form.append("alt", data.imageAlt);
+      }
+      if (data.id) {
+         form.append("id", data.id);
+      }
+      const method = data.id ? axiosInstance.put : axiosInstance.post;
+      method("/blogs", form)
+         .then((response) => {
+            if (response.status === 200) {
+               successCB();
+            }
+         })
+         .catch((error) => {
+            console.log(error);
+            setLoading(false);
+         })
+         .finally(() => setLoading(false));
+
+      function successCB() {
+         resetForm();
+         dispatch(fetchBlogs({}));
+      }
    };
 
    useEffect(() => {
-      if (selectedProduct) {
+      if (selectedBlog) {
          form.reset({
-            id: selectedProduct.id,
+            id: selectedBlog.id,
             image: [],
-            imageAlt: selectedProduct.alt || "",
-            title: selectedProduct.title,
-            description: selectedProduct.description || "",
+            title: selectedBlog.title,
+            content: selectedBlog.content,
+            imageAlt: selectedBlog.alt || "",
          });
-         setExistingImage(selectedProduct.image);
+         setExistingImage(selectedBlog.image);
       }
-   }, [selectedProduct]); //eslint-disable-line
+   }, [selectedBlog]); //eslint-disable-line
 
    return (
       <Form {...form}>
@@ -115,9 +121,9 @@ export default function ProductsForm() {
                         <FormLabel>Image Alt</FormLabel>
                         <FormControl>
                            <Input
-                              {...field}
                               type="text"
-                              placeholder="Image Alt"
+                              placeholder="Image Alt Title"
+                              {...field}
                            />
                         </FormControl>
                         <FormMessage />
@@ -131,7 +137,11 @@ export default function ProductsForm() {
                      <FormItem>
                         <FormLabel>Title</FormLabel>
                         <FormControl>
-                           <Input {...field} placeholder="Enter Title" />
+                           <Input
+                              type="text"
+                              placeholder="Blog Title"
+                              {...field}
+                           />
                         </FormControl>
                         <FormMessage />
                      </FormItem>
@@ -139,13 +149,13 @@ export default function ProductsForm() {
                />
                <FormField
                   control={form.control}
-                  name="description"
+                  name="content"
                   render={({ field, fieldState: { error } }) => (
                      <FormItem>
-                        <FormLabel>Description</FormLabel>
+                        <FormLabel>Content</FormLabel>
                         <FormControl>
                            <TextEditor
-                              placeholder="Enter description"
+                              placeholder="Enter blog content"
                               value={field.value}
                               setValue={field.onChange}
                               error={error?.message}
@@ -155,8 +165,8 @@ export default function ProductsForm() {
                      </FormItem>
                   )}
                />
+               <FormAction reset={() => resetForm()} loading={loading} />
             </div>
-            <FormAction reset={resetForm} loading={loading} />
          </form>
       </Form>
    );

@@ -10,6 +10,7 @@ import Work from "./routes/work";
 import Testimonial from "./routes/testimonial";
 import Experts from "./routes/experts";
 import Products from "./routes/products";
+import Blogs from "./routes/blogs";
 
 dotenv.config();
 const app = express();
@@ -55,6 +56,7 @@ app.use("/api/works", Work);
 app.use("/api/testimonials", Testimonial);
 app.use("/api/experts", Experts);
 app.use("/api/products", Products);
+app.use("/api/blogs", Blogs);
 
 app.listen(PORT, () =>
    console.log(`🚀 Server is running at http://localhost:${PORT}`)

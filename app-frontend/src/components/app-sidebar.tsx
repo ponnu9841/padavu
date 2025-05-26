@@ -8,7 +8,7 @@ import {
   // FaAddressBook,
   FaInfoCircle,
   // FaThList,
-  // FaBlog,
+  FaBlog,
   FaBriefcase
 } from "react-icons/fa";
 import { NavUser } from "./nav-user";
@@ -75,11 +75,11 @@ const items = [
   //   url: "/dashboard/contact",
   //   icon: FaAddressBook,
   // },
-  // {
-  //   title: "Blog",
-  //   url: "/dashboard/blog",
-  //   icon: FaBlog,
-  // },
+  {
+    title: "Blogs",
+    url: "/dashboard/blogs",
+    icon: FaBlog,
+  },
   {
     title: "Experts",
     url: "/dashboard/experts",

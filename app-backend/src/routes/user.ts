@@ -11,7 +11,7 @@ import validationErrorHandler from "../utils/validation-error-handler";
 
 const router = Router();
 
-router.post("/register", async (req: Request, res: Response) => {
+router.post("/register", async (req, res, next) => {
    const { name, email, password } = req.body;
    const hashedPassword = await bcrypt.hash(password, 11);
    const reqBody: UserInput = {
@@ -41,10 +41,11 @@ router.post("/register", async (req: Request, res: Response) => {
       }
    } catch (error) {
       errorHandler(error as Error, req, res);
+      next(error);
    }
 });
 
-router.post("/login", async (req: Request, res: Response) => {
+router.post("/login", async (req, res, next) => {
    const { email, password } = req.body;
    const reqBody: Omit<UserInput, "name"> = {
       email,
@@ -90,6 +91,7 @@ router.post("/login", async (req: Request, res: Response) => {
       });
    } catch (error) {
       errorHandler(error as Error, req, res);
+      next(error);
    }
 });
 

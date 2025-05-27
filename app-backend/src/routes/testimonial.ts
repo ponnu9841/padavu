@@ -9,7 +9,7 @@ import { errorHandler } from "../utils/error-handler";
 const router = Router();
 const uploadMiddleware = upload("testimonial");
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
    try {
       const testimonials = await prisma.testimonial.findMany({
          orderBy: { createdAt: "desc" },
@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
       });
    } catch (error) {
       errorHandler(error as Error, req, res);
+      next(error);
    }
 });
 
@@ -34,7 +35,7 @@ router.post(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       try {
          const filePath = req.file && extractFilePath(req.file);
          const data = req.body;
@@ -58,6 +59,7 @@ router.post(
          res.status(200).json({ data: testimonial });
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
@@ -66,7 +68,7 @@ router.put(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       try {
          const data = req.body;
          const reqBody: ReqBody = {
@@ -87,12 +89,13 @@ router.put(
          res.status(200).json({ data: testimonial });
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
 
-router.delete("/", authenticateJWT, async (req, res) => {
-   deleteRecord(req, res, "testimonial", false);
+router.delete("/", authenticateJWT, async (req, res, next) => {
+   deleteRecord(req, res, next, "testimonial", false);
 });
 
 export default router;

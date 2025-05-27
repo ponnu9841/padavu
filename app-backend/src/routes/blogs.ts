@@ -13,7 +13,7 @@ import {
 const router = Router();
 const uploadMiddleware = upload("blog");
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
    try {
       const { skip, take } = getPaginationParams(req);
       const page = parseInt(req.query.page as string) || 1;
@@ -31,10 +31,11 @@ router.get("/", async (req, res) => {
       );
    } catch (error) {
       errorHandler(error as Error, req, res);
+      next(error);
    }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
    try {
       const id = req.params.id;
       const blog = await prisma.blog.findFirst({
@@ -45,6 +46,7 @@ router.get("/:id", async (req, res) => {
       });
    } catch (error) {
       errorHandler(error as Error, req, res);
+      next(error);
    }
 });
 
@@ -52,7 +54,7 @@ router.post(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       try {
          if (!req.file) {
             res.status(400).json({ error: "No file to upload" });
@@ -75,6 +77,7 @@ router.post(
          res.status(200).json({ data: service });
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
@@ -83,7 +86,7 @@ router.put(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       try {
          const data = req.body;
          const reqBody: ReqBody = {
@@ -104,12 +107,13 @@ router.put(
          res.status(200).json({ data: blog });
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
 
-router.delete("/", authenticateJWT, async (req, res) => {
-   deleteRecord(req, res, "blog");
+router.delete("/", authenticateJWT, async (req, res, next) => {
+   deleteRecord(req, res, next, "blog");
 });
 
 export default router;

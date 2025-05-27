@@ -34,7 +34,9 @@ export default function BannerForm() {
    const { register } = form;
 
    const dispatch = useAppDispatch();
-   const { selectedBanner } = useAppSelector((state) => state.banners);
+   const selectedBanner = useAppSelector(
+      (state) => state.banners.selectedBanner
+   );
    const [loading, setLoading] = useState(false);
    const [existingImage, setExistingImage] = useState("");
 
@@ -107,23 +109,21 @@ export default function BannerForm() {
                />
             </div>
 
-            {form.watch("image")?.length > 0 && (
-               <div className="mt-4">
-                  <FormField
-                     control={form.control}
-                     name="title"
-                     render={({ field }) => (
-                        <FormItem>
-                           <FormLabel>Title</FormLabel>
-                           <FormControl>
-                              <Input {...field} placeholder="Enter Title" />
-                           </FormControl>
-                           <FormMessage />
-                        </FormItem>
-                     )}
-                  />
-               </div>
-            )}
+            <div className="mt-4">
+               <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                     <FormItem>
+                        <FormLabel>Title</FormLabel>
+                        <FormControl>
+                           <Input {...field} placeholder="Enter Title" />
+                        </FormControl>
+                        <FormMessage />
+                     </FormItem>
+                  )}
+               />
+            </div>
 
             <div className="mt-4">
                <FormField

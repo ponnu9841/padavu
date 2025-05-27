@@ -44,7 +44,7 @@ export const loginSchema = z.object({
 export const bannerSchema = z
    .object({
       id: z.string().optional(),
-      image: fileSchema(),
+      image: fileSchema().optional(),
       imageAlt: z.string().optional(),
       title: z.string().optional(),
       description: z.string().optional(),

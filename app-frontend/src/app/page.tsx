@@ -11,10 +11,13 @@ import Testimonials from "@/components/sections/testimonials";
 import Vision from "@/components/sections/vision";
 import Vlogs from "@/components/sections/vlog";
 import Works from "@/components/sections/works";
-import { getBannersResponse } from "@/lib/get-data";
+import { getBannersResponse, getExpertsResponse, getPackagesResponse } from "@/lib/get-data";
 
 const Home = async () => {
-   const bannerData: Banner[] = await getBannersResponse();
+   const bannerData = await getBannersResponse();
+   const expertsData = await getExpertsResponse();
+   const packagesData = await getPackagesResponse(); // Assuming packages data is fetched similarly
+
 
    return (
       <main className="min-h-screen">
@@ -24,10 +27,10 @@ const Home = async () => {
          <Stats />
 
          {/* Experts Section */}
-         <Experts />
+         <Experts experts={expertsData} />
 
          {/* Packages Section */}
-         <Packages />
+         <Packages packages={packagesData} />
 
          {/* How Do we work */}
          <HowDoWeWork />

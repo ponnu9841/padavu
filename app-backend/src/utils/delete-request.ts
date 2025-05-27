@@ -1,10 +1,11 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { deleteFileFromUrl } from "./file";
 import prisma from "./prisma";
 
 export const deleteRecord = async (
     req: Request,
     res: Response,
+    next: NextFunction,
     modelName: keyof typeof prisma,
     imageRequred = true,
 ) => {
@@ -28,5 +29,6 @@ export const deleteRecord = async (
     } catch (error) {
         console.error("Error deleting record:", error);
         res.status(500).json({ message: "Failed to delete record" });
+        next(error);
     }
 };

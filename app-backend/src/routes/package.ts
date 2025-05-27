@@ -70,7 +70,7 @@ router.put(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       try {
          const data = req.body;
 
@@ -96,12 +96,13 @@ router.put(
          res.status(200).json({ data: updatedPackage });
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
 
-router.delete("/", authenticateJWT, async (req, res) => {
-   deleteRecord(req, res, "package");
+router.delete("/", authenticateJWT, async (req, res, next) => {
+   deleteRecord(req, res, next, "package");
 });
 
 export default router;

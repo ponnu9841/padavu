@@ -9,7 +9,7 @@ import { errorHandler } from "../utils/error-handler";
 const router = Router();
 const uploadMiddleware = upload("mission");
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
    try {
       const banner = await prisma.mission.findFirst({
          orderBy: { createdAt: "desc" },
@@ -26,6 +26,7 @@ router.get("/", async (req, res) => {
       });
    } catch (error) {
       errorHandler(error as Error, req, res);
+      next(error);
    }
 });
 
@@ -33,7 +34,7 @@ router.post(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       const data = req.body;
       try {
          if (req.file) {
@@ -50,6 +51,7 @@ router.post(
          }
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
@@ -58,7 +60,7 @@ router.put(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       try {
          const data = req.body;
          const reqBody: ReqBody = {
@@ -79,12 +81,13 @@ router.put(
          res.status(200).json({ data: service });
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
 
-router.delete("/", authenticateJWT, async (req, res) => {
-   deleteRecord(req, res, "mission");
+router.delete("/", authenticateJWT, async (req, res, next) => {
+   deleteRecord(req, res, next, "mission");
 });
 
 export default router;

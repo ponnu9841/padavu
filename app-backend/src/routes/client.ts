@@ -9,7 +9,7 @@ import { errorHandler } from "../utils/error-handler";
 const router = Router();
 const uploadMiddleware = upload("client");
 
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
    try {
       const partners = await prisma.client.findMany({
          select: {
@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
       res.status(200).json({ data: partners });
    } catch (error) {
       errorHandler(error as Error, req, res);
+      next(error);
    }
 });
 
@@ -28,7 +29,7 @@ router.post(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       const data = req.body;
       try {
          if (req.file) {
@@ -44,6 +45,7 @@ router.post(
          }
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
@@ -52,7 +54,7 @@ router.put(
    "/",
    authenticateJWT,
    uploadMiddleware.single("image"),
-   async (req, res) => {
+   async (req, res, next) => {
       try {
          const data = req.body;
          const reqBody: { [key: string]: any } = {
@@ -76,12 +78,13 @@ router.put(
          res.status(200).json({ data: partner });
       } catch (error) {
          errorHandler(error as Error, req, res);
+         next(error);
       }
    }
 );
 
-router.delete("/", authenticateJWT, async (req, res) => {
-   deleteRecord(req, res, "client");
+router.delete("/", authenticateJWT, async (req, res, next) => {
+   deleteRecord(req, res, next, "client");
 });
 
 export default router;

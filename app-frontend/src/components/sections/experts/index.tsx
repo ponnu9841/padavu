@@ -20,7 +20,7 @@ const Heading = ({ heading }: { heading: string }) => (
    />
 );
 
-export default function Experts() {
+export default function Experts({ experts }: { experts?: Experts[] | null }) {
    return (
       <section className="bg-secondary text-background">
          <div className="bg-card rounded-xl md:rounded-4xl 2xl:rounded-[5rem] p-5 md:p-10">

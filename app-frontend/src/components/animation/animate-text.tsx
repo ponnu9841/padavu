@@ -1,3 +1,4 @@
+"use client";
 import { motion } from "motion/react";
 
 function AnimateText({ text }: { text?: string }) {
@@ -10,7 +11,7 @@ function AnimateText({ text }: { text?: string }) {
 					initial={{ opacity: 0 }}
 					whileInView={{ opacity: 1 }}
 					transition={{
-						duration: 0.5,
+						duration: 1,
 						delay: i / 6,
 					}}
 					key={i}

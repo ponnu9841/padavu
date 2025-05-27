@@ -2,8 +2,9 @@ import NextImage from "@/components/Image";
 import React from "react";
 import { ShadowGradient } from "../about";
 import AnimatedTypography from "@/components/animation/animated-typography";
+import parse from "html-react-parser";
 
-export default function Vision() {
+export default function Vision({ visionData }: { visionData: Vision | null }) {
    return (
       <section className="py-10 px-4 flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
          <div className="md:w-1/2 text-primary/90">
@@ -13,8 +14,11 @@ export default function Vision() {
                text="Our Vision"
                className="text-2xl font-bold mb-6 text-primary/90"
             />
+            <div className="[&>ol]:list-disc [&>ol]:ml-6">
+               {parse(visionData?.description || "")}
+            </div>
 
-            <ul className="space-y-2 text-sm md:mb-16">
+            {/* <ul className="space-y-2 text-sm md:mb-16">
                <li>
                   - Empower customers through education on professional interior
                   design practices.
@@ -27,12 +31,12 @@ export default function Vision() {
                   - Eradicate unethical practices in the interior design
                   industry
                </li>
-            </ul>
+            </ul> */}
          </div>
          <div className="md:w-1/2 relative">
             <NextImage
                className="aspect-[3/2] md:aspect-auto md:w-full md:rounded-r-large"
-               src="/images/about.webp"
+               src={visionData?.image || ""}
                imageClassName="md:object-cover md:rounded-r-[5rem]"
             />
             <ShadowGradient />

@@ -11,13 +11,43 @@ import Testimonials from "@/components/sections/testimonials";
 import Vision from "@/components/sections/vision";
 import Vlogs from "@/components/sections/vlog";
 import Works from "@/components/sections/works";
-import { getBannersResponse, getExpertsResponse, getPackagesResponse } from "@/lib/get-data";
+import {
+   getAboutResponse,
+   getBannersResponse,
+   getClientsResponse,
+   getExpertsResponse,
+   getMissionResponse,
+   getPackagesResponse,
+   getProductsResponse,
+   getTestimonialsResponse,
+   getVisionResponse,
+   getWorksResponse,
+} from "@/lib/get-data";
 
 const Home = async () => {
-   const bannerData = await getBannersResponse();
-   const expertsData = await getExpertsResponse();
-   const packagesData = await getPackagesResponse(); // Assuming packages data is fetched similarly
-
+   const [
+      bannerData,
+      expertsData,
+      packagesData,
+      aboutData,
+      missionData,
+      visionData,
+      clientsData,
+      worksData,
+      testimonialsData,
+      productsData,
+   ] = await Promise.all([
+      getBannersResponse(),
+      getExpertsResponse(),
+      getPackagesResponse(),
+      getAboutResponse(),
+      getMissionResponse(),
+      getVisionResponse(),
+      getClientsResponse(),
+      getWorksResponse(),
+      getTestimonialsResponse(),
+      getProductsResponse()
+   ]);
 
    return (
       <main className="min-h-screen">
@@ -36,25 +66,25 @@ const Home = async () => {
          <HowDoWeWork />
 
          {/* About */}
-         <About />
+         <About aboutData={aboutData} />
 
          {/* Our Mission */}
-         <Mission />
+         <Mission missionData={missionData} />
 
          {/* Vision */}
-         <Vision />
+         <Vision visionData={visionData} />
 
          {/* Clients */}
-         <Clients />
+         <Clients clientsData={clientsData} />
 
          {/* Works */}
-         <Works />
+         {worksData && <Works worksData={worksData} />}
 
          {/* Testimonials Section */}
-         <Testimonials />
+         {testimonialsData && <Testimonials testimonialsData={testimonialsData} />}
 
          {/* Products */}
-         <Products />
+         {productsData && <Products productsData={productsData} />}
 
          {/* Vlogs  */}
          <Vlogs />

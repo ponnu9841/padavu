@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import AnimateText from "./animate-text";
 import { cn } from "@/lib/utils";
@@ -26,6 +24,7 @@ export default function AnimatedTypography({
    const Tag = tagMap[variant] as keyof React.JSX.IntrinsicElements;
    return (
       <Tag className={cn(className)}>
+         <span className="sr-only">{text}</span>
          <AnimateText text={text} />
       </Tag>
    );

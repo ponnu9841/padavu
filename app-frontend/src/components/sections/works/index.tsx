@@ -1,26 +1,34 @@
-"use client";
 // import Link from "next/link";
 import React from "react";
-import { allWorks } from "@/lib/constants";
+// import { allWorks } from "@/lib/constants";
 import ZoomAnimation from "@/components/animation/zoom-animation";
 import NextImage from "@/components/Image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import AnimatedTypography from "@/components/animation/animated-typography";
 
-export default function Works() {
+export default function Works({
+   worksData,
+}: {
+   worksData: WorksResponse;
+}) {
    return (
       <div className="py-10 px-4 max-w-6xl mx-auto">
-         <h2 className="mb-3">Completed works</h2>
+         <AnimatedTypography
+            variant="h2"
+            text="Completed Works"
+            className="text-primary mb-4"
+         />
+         {/* <h2 className="mb-4 text-primary">Completed works</h2> */}
          <div className="columns-1 md:columns-3 gap-4">
-            {allWorks.map((work, index) => (
+            {worksData.data.map((work, index) => (
                <ZoomAnimation key={index}>
-                  <div className={`relative w-full mb-4`} key={index}>
+                  <div className="relative w-full mb-4" key={index}>
                      <NextImage
                         src={work.image}
                         className="aspect-square"
                         imageClassName="object-cover"
                      />
-                     {/* <img src={work.image} alt={work.title} /> */}
                   </div>
                </ZoomAnimation>
             ))}

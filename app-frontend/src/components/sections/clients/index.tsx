@@ -1,23 +1,27 @@
 import AnimatedTypography from "@/components/animation/animated-typography";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+// import { Button } from "@/components/ui/button";
+// import Link from "next/link";
 import React from "react";
 import ClientLists from "./client-lists";
 
-export default function Clients() {
+export default function Clients({
+   clientsData,
+}: {
+   clientsData: Client[] | null;
+}) {
    return (
-      <section className="pb-10 px-4 max-w-6xl mx-auto">
+      <section className="px-4 max-w-6xl mx-auto">
          {/* <h2 className="mb-3">Our Clients</h2> */}
          <AnimatedTypography
             variant="h2"
             text="OUR CLIENTS"
-            className="text-center"
+            className="text-center text-primary mb-4 lg:mb-8"
          />
 
-         <ClientLists />
-         <Link href="#" className="flex justify-center">
+         {clientsData && <ClientLists clientsData={clientsData} />}
+         {/* <Link href="#" className="flex justify-center">
             <Button size="lg">View More</Button>
-         </Link>
+         </Link> */}
       </section>
    );
 }

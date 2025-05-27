@@ -1,5 +1,3 @@
-"use client";
-
 import NextImage from "@/components/Image";
 import parse from "html-react-parser";
 import BlurAnimation from "@/components/animation/blur-animation";

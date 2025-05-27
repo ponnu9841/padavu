@@ -136,3 +136,5 @@ type Mission = {
    alt: string | null;
    description: string;
 };
+
+type Vision = Mission;

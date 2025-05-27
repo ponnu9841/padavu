@@ -1,10 +1,11 @@
 import AnimatedTypography from "@/components/animation/animated-typography";
 import NextImage from "@/components/Image";
+import parse from "html-react-parser";
 
 export const ShadowGradient = () => (
    <div className="absolute inset-0 md:bg-[linear-gradient(90deg,_rgba(255,255,255,1)_0%,_rgba(255,255,255,0.1)_30%,_rgba(255,255,255,0)_100%)]" />
 );
-export default function About() {
+export default function About({ aboutData }: { aboutData: About | null }) {
    return (
       <section className="py-10 px-4 flex flex-col md:flex-row gap-4 md:gap-8 max-w-6xl mx-auto">
          <div className="md:w-1/2">
@@ -12,20 +13,17 @@ export default function About() {
             <AnimatedTypography
                variant="h2"
                text="About Us"
-               className="lg:mb-8"
+               className="lg:mb-8 text-primary"
             />
 
-            <p className="text-primary md:mb-8 lg:text-lg lg:mb-24">
-               Welcome to Padavu Interio, a reputable interior contracting firm
-               based out of Calicut. With a state-of-the-art 5000sqft
-               manufacturing unit, we&apos;ve established ourselves as a trusted
-               name in the industry since our inception in 2016
-            </p>
+            <div className="text-primary">
+               {parse(aboutData?.short_description || "")}
+            </div>
          </div>
          <div className="md:w-1/2 relative">
             <NextImage
                className="aspect-[3/2] md:aspect-auto md:w-full md:rounded-r-large"
-               src="/images/about.webp"
+               src={aboutData?.image || ""}
                imageClassName="md:object-cover md:rounded-r-[5rem]"
             />
             <ShadowGradient />

@@ -1,3 +1,4 @@
+import { AnimateElement } from "@/components/animation";
 import AnimatedTypography from "@/components/animation/animated-typography";
 import { RenderElement } from "@/components/render-element";
 import Image from "next/image";
@@ -56,11 +57,16 @@ export default function HowDoWeWork() {
                   <div className="text-primary font-semibold mb-1">
                      {index + 1}.
                   </div>
-                  <RenderElement
-                     title={step.title}
-                     variant="h3"
-                     className="text-primary text-sm font-medium"
-                  />
+                  <AnimateElement
+                     animation="fadeInUp"
+                     duration={(index + 1) * 0.2}
+                  >
+                     <RenderElement
+                        title={step.title}
+                        variant="h3"
+                        className="text-primary text-sm font-medium"
+                     />
+                  </AnimateElement>
                </div>
             ))}
          </div>

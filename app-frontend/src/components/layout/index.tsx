@@ -1,15 +1,16 @@
 import { ReactNode } from "react";
 import NavigationMenu from "./navigation-menu";
 import NextImage from "@/components/Image";
+import Link from "next/link";
 
 export default function Layout({ children }: { children: ReactNode }) {
    return (
       <>
          <header className="bg-primary text-background p-4 sticky top-0 z-10 shadow h-25 flex items-center">
             <div className="container flex justify-between items-center">
-               <div className="text-2xl font-bold">
+               <Link href="/" className="text-2xl font-bold">
                   <NextImage src="/images/logo.webp" className="aspect-[3/1] w-50 max-h-25" />
-               </div>
+               </Link>
                <NavigationMenu />
             </div>
          </header>

@@ -1,3 +1,4 @@
+"use client"
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { toast } from "sonner";
 

@@ -14,6 +14,7 @@ import Works from "@/components/sections/works";
 import {
    getAboutResponse,
    getBannersResponse,
+   getBlogsResponse,
    getClientsResponse,
    getExpertsResponse,
    getMissionResponse,
@@ -36,6 +37,7 @@ const Home = async () => {
       worksData,
       testimonialsData,
       productsData,
+      blogData,
    ] = await Promise.all([
       getBannersResponse(),
       getExpertsResponse(),
@@ -46,36 +48,37 @@ const Home = async () => {
       getClientsResponse(),
       getWorksResponse(),
       getTestimonialsResponse(),
-      getProductsResponse()
+      getProductsResponse(),
+      getBlogsResponse(),
    ]);
 
    return (
-      <main className="min-h-screen">
+      <>
          <Hero banners={bannerData} />
 
          {/* Stats Section */}
          <Stats />
 
          {/* Experts Section */}
-         <Experts experts={expertsData} />
+         {expertsData && <Experts experts={expertsData} />}
 
          {/* Packages Section */}
-         <Packages packages={packagesData} />
+         {packagesData && <Packages packages={packagesData} />}
 
          {/* How Do we work */}
          <HowDoWeWork />
 
          {/* About */}
-         <About aboutData={aboutData} />
+         {aboutData && <About aboutData={aboutData} />}
 
          {/* Our Mission */}
-         <Mission missionData={missionData} />
+         {missionData && <Mission missionData={missionData} />}
 
          {/* Vision */}
-         <Vision visionData={visionData} />
+         {visionData && <Vision visionData={visionData} />}
 
          {/* Clients */}
-         <Clients clientsData={clientsData} />
+         {clientsData && <Clients clientsData={clientsData} />}
 
          {/* Works */}
          {worksData && <Works worksData={worksData} />}
@@ -87,8 +90,8 @@ const Home = async () => {
          {productsData && <Products productsData={productsData} />}
 
          {/* Vlogs  */}
-         <Vlogs />
-      </main>
+         {blogData && <Vlogs blogData={blogData} />}
+      </>
    );
 };
 

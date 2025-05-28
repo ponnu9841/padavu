@@ -1,3 +1,4 @@
+import { AnimateElement } from "@/components/animation";
 import AnimatedTypography from "@/components/animation/animated-typography";
 import NextImage from "@/components/Image";
 import parse from "html-react-parser";
@@ -5,7 +6,7 @@ import parse from "html-react-parser";
 export const ShadowGradient = () => (
    <div className="absolute inset-0 md:bg-[linear-gradient(90deg,_rgba(255,255,255,1)_0%,_rgba(255,255,255,0.1)_30%,_rgba(255,255,255,0)_100%)]" />
 );
-export default function About({ aboutData }: { aboutData: About | null }) {
+export default function About({ aboutData }: { aboutData: About }) {
    return (
       <section className="py-10 px-4 flex flex-col md:flex-row gap-4 md:gap-8 max-w-6xl mx-auto">
          <div className="md:w-1/2">
@@ -16,9 +17,11 @@ export default function About({ aboutData }: { aboutData: About | null }) {
                className="lg:mb-8 text-primary"
             />
 
-            <div className="text-primary">
-               {parse(aboutData?.short_description || "")}
-            </div>
+            <AnimateElement animation="fadeInUp">
+               <div className="text-primary">
+                  {parse(aboutData?.short_description || "")}
+               </div>
+            </AnimateElement>
          </div>
          <div className="md:w-1/2 relative">
             <NextImage

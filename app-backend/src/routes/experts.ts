@@ -6,6 +6,14 @@ import prisma from "../utils/prisma";
 import { deleteRecord } from "../utils/delete-request";
 import { errorHandler } from "../utils/error-handler";
 
+const columns = {
+   id: true,
+   title: true,
+   image: true,
+   alt: true,
+   description: true,
+};
+
 const router = Router();
 const uploadMiddleware = upload("experts");
 
@@ -13,16 +21,25 @@ router.get("/", async (req, res, next) => {
    try {
       const testimonials = await prisma.experts.findMany({
          orderBy: { createdAt: "desc" },
-         select: {
-            id: true,
-            title: true,
-            image: true,
-            alt: true,
-            description: true,
-         },
+         select: columns,
       });
       res.status(200).json({
          data: testimonials,
+      });
+   } catch (error) {
+      errorHandler(error as Error, req, res);
+      next(error);
+   }
+});
+
+router.get("/:id", async (req, res, next) => {
+   try {
+      const data = await prisma.experts.findUnique({
+         where: { id: req.params.id },
+         select: columns,
+      });
+      res.status(200).json({
+         data,
       });
    } catch (error) {
       errorHandler(error as Error, req, res);

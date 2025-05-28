@@ -10,6 +10,7 @@ let cachedClientData: Client[] | null = null;
 let cachedWorksData: WorksResponse | null = null;
 let cachedTestimonialsData: Testimonial[] | null = null;
 let cachedProductsData: Product[] | null = null;
+let cachedBlogData: BlogResponse | null = null;
 
 export async function getBannersResponse(): Promise<Banner[] | null> {
    try {
@@ -135,6 +136,29 @@ export async function getProductsResponse(): Promise<Product[] | null> {
          cachedProductsData = response.data.data;
       }
       return cachedProductsData || null;
+   } catch (error) {
+      console.error("Error fetching experts:", error);
+      return null;
+   }
+}
+
+export async function getBlogsResponse(): Promise<BlogResponse | null> {
+   try {
+      if (!cachedBlogData) {
+         const response = await axiosInstance.get("/blogs");
+         cachedBlogData = response.data.data;
+      }
+      return cachedBlogData || null;
+   } catch (error) {
+      console.error("Error fetching experts:", error);
+      return null;
+   }
+}
+
+export async function getExpertsById(id: string): Promise<Experts | null> {
+   try {
+      const response = await axiosInstance.get(`/experts/${id}`);
+      return response.data.data || null;
    } catch (error) {
       console.error("Error fetching experts:", error);
       return null;

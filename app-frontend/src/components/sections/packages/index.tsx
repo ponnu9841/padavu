@@ -24,11 +24,7 @@ import parse from "html-react-parser";
 //    },
 // ];
 
-export default function Packages({
-   packages,
-}: {
-   packages?: PackagesData[] | null;
-}) {
+export default function Packages({ packages }: { packages?: PackagesData[] }) {
    return (
       <section className="relative bg-secondary text-background">
          <div className="p-5 md:p-10">
@@ -50,7 +46,9 @@ export default function Packages({
 
                         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white">
                            <h4 className="text-xl font-bold">{item.title}</h4>
-                           <div className="text-xs mt-2">{parse(item.description || "")}</div>
+                           <div className="text-xs mt-2">
+                              {parse(item.description || "")}
+                           </div>
                         </div>
                      </div>
                      <div className="mb-2">

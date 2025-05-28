@@ -2,8 +2,9 @@ import NextImage from "@/components/Image";
 import { ShadowGradient } from "../about";
 import AnimatedTypography from "@/components/animation/animated-typography";
 import parse from "html-react-parser";
+import { AnimateElement } from "@/components/animation";
 
-export default function Mission({missionData}: { missionData: Mission | null }) {
+export default function Mission({ missionData }: { missionData: Mission }) {
    return (
       <section className="px-4 flex flex-col md:flex-row gap-6 max-w-6xl mx-auto">
          <div className="md:w-3/5 text-primary/90">
@@ -14,7 +15,11 @@ export default function Mission({missionData}: { missionData: Mission | null }) 
                className="text-2xl font-bold mb-6 text-primary/90"
             />
 
-            <div className="[&>ol]:list-disc [&>ol]:ml-6">{parse(missionData?.description || "")}</div>
+            <AnimateElement animation="fadeInUp" duration={0.7}>
+               <div className="[&>ol]:list-disc [&>ol]:ml-6">
+                  {parse(missionData?.description || "")}
+               </div>
+            </AnimateElement>
             {/* <p className="mb-4 text-sm">
                At Padavu Interio, we deliver interior design solutions with
                integrity and transparency. We commit to:

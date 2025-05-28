@@ -4,11 +4,7 @@ import AnimatedTypography from "@/components/animation/animated-typography";
 import React from "react";
 import ClientLists from "./client-lists";
 
-export default function Clients({
-   clientsData,
-}: {
-   clientsData: Client[] | null;
-}) {
+export default function Clients({ clientsData }: { clientsData: Client[] }) {
    return (
       <section className="px-4 max-w-6xl mx-auto">
          {/* <h2 className="mb-3">Our Clients</h2> */}

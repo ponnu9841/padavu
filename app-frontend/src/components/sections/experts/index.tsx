@@ -1,6 +1,7 @@
 import AnimatedTypography from "@/components/animation/animated-typography";
 import NextImage from "@/components/Image";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import React from "react";
 
 const BgShade = ({ className }: { className?: string }) => (
@@ -20,13 +21,13 @@ const Heading = ({ heading }: { heading: string }) => (
    />
 );
 
-export default function Experts({ experts }: { experts?: Experts[] | null }) {
+export default function Experts({ experts }: { experts?: Experts[] }) {
    if (!experts || experts.length === 0) return null;
 
    const kitchen1 = experts[0];
-   const livingRoom = experts[1];
+   const kitchen2 = experts[1];
    const bedroom = experts[2];
-   const kitchen2 = experts[3];
+   const livingRoom = experts[3];
 
    return (
       <section className="bg-secondary text-background">
@@ -39,7 +40,7 @@ export default function Experts({ experts }: { experts?: Experts[] | null }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-1 lg:grid-row-2">
                {/* First Kitchen - Top Left */}
                {kitchen1 && (
-                  <div className="relative col-span-2 row-span-1 max-h-96 w-full aspect-square">
+                  <Link href={`/experts/${kitchen1.id}`} className="relative min-w-full lg:col-span-2 lg:row-span-1 max-h-98">
                      <NextImage
                         className="relative aspect-square rounded-tl-4xl"
                         imageClassName="object-cover lg:rounded-tl-4xl"
@@ -48,12 +49,12 @@ export default function Experts({ experts }: { experts?: Experts[] | null }) {
                      />
                      <Heading heading={kitchen1.title.toUpperCase()} />
                      <BgShade className="lg:rounded-tl-4xl" />
-                  </div>
+                  </Link>
                )}
 
                {/* Kitchen2 - Large Right */}
                {kitchen2 && (
-                  <div className="relative col-span-1 lg:row-span-2 w-full">
+                  <Link href={`/experts/${kitchen2.id}`} className="relative col-span-1 lg:row-span-2 w-full">
                      <NextImage
                         className="relative aspect-square"
                         imageClassName="object-cover lg:rounded-r-4xl"
@@ -62,16 +63,16 @@ export default function Experts({ experts }: { experts?: Experts[] | null }) {
                      />
                      <Heading heading={kitchen2.title.toUpperCase()} />
                      <BgShade className="lg:rounded-r-4xl" />
-                  </div>
+                  </Link>
                )}
 
                {/* Bottom Row */}
                {(bedroom || livingRoom) && (
                   <div className="col-span-2 row-span-1 lg:max-h-96 w-full overflow-hidden lg:rounded-bl-4xl">
-                     <div className="flex flex-col lg:flex-row">
+                     <div className="flex lg:flex-col lg:flex-row">
                         {/* Bedroom */}
                         {bedroom && (
-                           <div className="relative w-full lg:w-1/2">
+                           <Link href={`/experts/${bedroom.id}`} className="relative w-full lg:w-1/2">
                               <NextImage
                                  className="relative aspect-square"
                                  imageClassName="object-cover lg:rounded-bl-4xl"
@@ -80,12 +81,12 @@ export default function Experts({ experts }: { experts?: Experts[] | null }) {
                               />
                               <Heading heading={bedroom.title.toUpperCase()} />
                               <BgShade className="lg:rounded-bl-4xl" />
-                           </div>
+                           </Link>
                         )}
 
                         {/* Living Room */}
                         {livingRoom && (
-                           <div className="relative w-full lg:w-1/2">
+                           <Link href={`/experts/${livingRoom.id}`} className="relative w-full lg:w-1/2">
                               <NextImage
                                  className="relative aspect-square"
                                  imageClassName="object-cover"
@@ -96,7 +97,7 @@ export default function Experts({ experts }: { experts?: Experts[] | null }) {
                                  heading={livingRoom.title.toUpperCase()}
                               />
                               <BgShade />
-                           </div>
+                           </Link>
                         )}
                      </div>
                   </div>

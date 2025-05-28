@@ -1,6 +1,8 @@
 import NextImage from "@/components/Image";
 import React from "react";
 import { RenderHeading, RenderBackground } from "@/components/render-element";
+import AnimatedTypography from "@/components/animation/animated-typography";
+import { AnimateElement } from "@/components/animation";
 
 export default function Products({
    productsData,
@@ -9,7 +11,12 @@ export default function Products({
 }) {
    return (
       <>
-         <h2 className="max-w-6xl mx-auto px-4 mb-4 mt-8">Products</h2>
+         {/* <h2 className="max-w-6xl mx-auto px-4 mb-4 mt-8">Products</h2> */}
+         <AnimatedTypography
+            variant="h2"
+            text="Products"
+            className="max-w-6xl mx-auto px-4 mb-4 mt-8 text-primary"
+         />
          <div className="flex flex-col gap-6">
             {productsData.map((item) => (
                <div className="relative" key={item.id}>
@@ -19,7 +26,9 @@ export default function Products({
                      src={item.image}
                   />
                   <RenderBackground />
-                  <RenderHeading heading={item.title} />
+                  <AnimateElement animation="fadeIn">
+                     <RenderHeading heading={item.title} />
+                  </AnimateElement>
                </div>
             ))}
             {/* <div className="relative">

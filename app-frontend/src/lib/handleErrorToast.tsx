@@ -1,6 +1,8 @@
 "use client"
+import { AxiosError } from "axios";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import { toast } from "sonner";
+import { clearToken } from "./local-storage-service";
 
 export const handleToast = (message: string) => {
 	toast("", {
@@ -18,4 +20,19 @@ export const handleToast = (message: string) => {
 		},
 		icon: <IoCloseCircleOutline size={28} />,
 	});
+};
+
+export const handleError = (error: AxiosError): Promise<never> => {
+   if (error.code === "ERR_CANCELED") return new Promise(() => {});
+   if (error.response) {
+      const { status, data } = error.response as { status: number; data: { error: string } };;
+      if(status === 401) clearToken();
+      handleToast(data.error);
+   } else if (error.request) {
+      handleToast("Network Error: Please check your internet connection.");
+   } else {
+      handleToast(`Error: ${error.message}`);
+   }
+
+   return Promise.reject(error); // Ensure error is caught downstream
 };

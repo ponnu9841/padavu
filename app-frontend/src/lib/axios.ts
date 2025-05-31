@@ -1,6 +1,5 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
-import { handleToast } from "@/lib/handleErrorToast";
-import { clearToken } from "@/lib/local-storage-service";
+import axios, { AxiosInstance } from "axios";
+import { handleError } from "./handleErrorToast";
 
 const axiosInstance: AxiosInstance = axios.create({
    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
@@ -9,20 +8,7 @@ const axiosInstance: AxiosInstance = axios.create({
 });
 
 // Common error handler
-const handleError = (error: AxiosError): Promise<never> => {
-   if (error.code === "ERR_CANCELED") return new Promise(() => {});
-   if (error.response) {
-      const { status, data } = error.response as { status: number; data: { error: string } };;
-      if(status === 401) clearToken();
-      handleToast(data.error);
-   } else if (error.request) {
-      handleToast("Network Error: Please check your internet connection.");
-   } else {
-      handleToast(`Error: ${error.message}`);
-   }
 
-   return Promise.reject(error); // Ensure error is caught downstream
-};
 
 axiosInstance.interceptors.request.use((config) => {
    const token = typeof window !== "undefined" && localStorage.getItem("token");

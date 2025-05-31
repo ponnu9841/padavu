@@ -181,6 +181,39 @@ export const missionSchema = z
       path: requireImageIfNoId.path,
    });
 
+export const headingSchema = z.object({
+   id: z.string().optional(),
+   title: z.string().min(3, "Title must be at least 3 characters"),
+   description: z.string().optional(),
+   section: z.string(),
+});
+
+export const pagesBannerSchema = z
+   .object({
+      id: z.string().optional(),
+      image: fileSchema(),
+      title: z.string().optional(),
+      alt: z.string().optional(),
+      page: z.string(),
+   })
+   .refine(requireImageIfNoId.condition, {
+      message: requireImageIfNoId.message,
+      path: requireImageIfNoId.path,
+   });
+
+export const seoSchema = z.object({
+	id: z.string().optional(),
+	title: z.string().min(3, "Title must be at least 3 characters"),
+	description: z.string().min(3, "Title must be at least 3 characters"),
+	page: z.string(),
+})
+
+export type SeoFormData = z.infer<typeof seoSchema>;
+
+export type PagesBannerFormData = z.infer<typeof pagesBannerSchema>;
+
+export type HeadingFormData = z.infer<typeof headingSchema>;
+
 export type VissionFormData = z.infer<typeof missionSchema>;
 
 export type MissionFormData = z.infer<typeof missionSchema>;

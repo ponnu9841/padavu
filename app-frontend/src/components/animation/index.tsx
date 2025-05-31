@@ -39,6 +39,7 @@ export function ExitAnimation({ children, className }: AnimationProp) {
       <motion.div
          initial={{ opacity: 0, scale: 0 }}
          animate={{ opacity: 1, scale: 1 }}
+         whileInView={{ opacity: 1, scale: 1 }}
          exit={{ opacity: 0, scale: 0 }}
          transition={{ duration: 0.5 }}
          className={className}
@@ -53,6 +54,7 @@ export function EnterAnimation({ children, className }: AnimationProp) {
       <motion.div
          initial={{ opacity: 0, scale: 0 }}
          animate={{ opacity: 1, scale: 1 }}
+         whileInView={{ opacity: 1, scale: 1 }}
          transition={{
             duration: 0.4,
             // delay: 1,
@@ -81,6 +83,7 @@ export function AnimateElement({
       <motion.div
          initial={selectedAnimation.initial}
          animate={selectedAnimation.animate}
+         whileInView={selectedAnimation.animate}
          transition={{ duration, delay }}
          className={className}
       >

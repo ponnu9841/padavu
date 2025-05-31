@@ -164,3 +164,54 @@ export async function getExpertsById(id: string): Promise<Experts | null> {
       return null;
    }
 }
+
+export async function getExpertsData(): Promise<Experts[] | null> {
+   try {
+      const response = await axiosInstance.get("/experts");
+      return response.data.data || [];
+   } catch (error) {
+      console.error("Error fetching experts:", error);
+      return null;
+   }
+}
+
+export async function getPagesBannersResponse(): Promise<PagesBanner[] | null> {
+   try {
+      const response = await axiosInstance.get("/pagesBanner");
+      return response.data.data;
+   } catch (error) {
+      console.error("Error fetching experts:", error);
+      return null;
+   }
+}
+
+export async function getPackagesData(): Promise<PackagesData[] | null> {
+   try {
+      const response = await axiosInstance.get("/packages");
+      return response.data.data || [];
+   } catch (error) {
+      console.error("Error fetching packages:", error);
+      return null;
+   }
+}
+
+export async function getPackageById(id: string): Promise<PackagesData | null> {
+   try {
+      const response = await axiosInstance.get(`/packages/${id}`);
+      return response.data.data || null;
+   } catch (error) {
+      console.error("Error fetching package:", error);
+      return null;
+   }
+}
+
+export async function getProductById(id: string): Promise<Product | null> {
+   try {
+      const response = await axiosInstance.get(`/products/${id}`);
+      return response.data.data || null;
+   } catch (error) {
+      console.error("Error fetching product:", error);
+      return null;
+   }
+}
+

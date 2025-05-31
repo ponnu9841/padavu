@@ -14,6 +14,7 @@ import Blogs from "./routes/blogs";
 import About from "./routes/about";
 import Mission from "./routes/mission";
 import Vision from "./routes/vision";
+import PagesBanner from "./routes/pages-banner";
 
 dotenv.config();
 const app = express();
@@ -63,6 +64,7 @@ app.use("/api/blogs", Blogs);
 app.use("/api/about", About);
 app.use("/api/mission", Mission);
 app.use("/api/vision", Vision);
+app.use("/api/pagesBanner", PagesBanner);
 
 app.listen(PORT, () =>
    console.log(`🚀 Server is running at http://localhost:${PORT}`)

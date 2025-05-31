@@ -1,3 +1,7 @@
+type PageProps = {
+   params: Promise<{ slug: string }>;
+};
+
 type Banner = {
    id: string;
    image: string;
@@ -116,11 +120,11 @@ type Blog = {
    alt?: string | null;
    createdAt: string;
    updatedAt: string;
-}
+};
 
 type BlogResponse = PaginationResponse & {
    data: Blog[] | [];
-}
+};
 
 type About = {
    id: string;
@@ -128,7 +132,7 @@ type About = {
    alt: string | null;
    short_description: string;
    long_description: string | null;
-}
+};
 
 type Mission = {
    id: string;
@@ -138,3 +142,25 @@ type Mission = {
 };
 
 type Vision = Mission;
+
+type Seo = {
+   id: string;
+   title: string;
+   description: string;
+   page: string;
+};
+
+type PagesBanner = {
+   id: string;
+   image: string;
+   alt: string | null;
+   title: string | null;
+   page: string;
+};
+
+type Heading = {
+   id: string;
+   title: string;
+   description: string | null;
+   section: string;
+};

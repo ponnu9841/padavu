@@ -1,15 +1,11 @@
 import NextImage from "@/components/Image";
 import parse from "html-react-parser";
-import { getExpertsById } from "@/lib/get-data";
+import { getProductById } from "@/lib/get-data";
 
-type PageProps = {
-  params: Promise<{ slug: string }>;
-};
-
-const ExpertsDetails = async (props: PageProps) => {
+const ProductsDetails = async (props: PageProps) => {
    const params = await props.params;
 
-   const data = params ? await getExpertsById(params.slug) : null;
+   const data = params ? await getProductById(params.slug) : null;
 
    if (data) {
       return (
@@ -22,7 +18,7 @@ const ExpertsDetails = async (props: PageProps) => {
                />
                <div className="lg:col-span-4">
                   <h1>{data.title}</h1>
-                  <div>{parse(data.description)}</div>
+                  <div>{parse(data.description || "")}</div>
                </div>
             </div>
          </div>
@@ -30,4 +26,4 @@ const ExpertsDetails = async (props: PageProps) => {
    }
 };
 
-export default ExpertsDetails;
+export default ProductsDetails;

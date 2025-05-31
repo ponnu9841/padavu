@@ -33,7 +33,7 @@ export default function Works({
                </ZoomAnimation>
             ))}
          </div>
-         <Link href="#" className="flex justify-center mt-4 lg:mt-8">
+         <Link href="/works" className="flex justify-center mt-4 lg:mt-8">
             <Button size="lg">View More</Button>
          </Link>
       </div>

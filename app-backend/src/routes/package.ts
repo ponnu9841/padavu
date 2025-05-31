@@ -8,26 +8,44 @@ import { errorHandler } from "../utils/error-handler";
 import { validatePackagePostRequest } from "../validation";
 import validationErrorHandler from "../utils/validation-error-handler";
 
+const columns = {
+   id: true,
+   image: true,
+   alt: true,
+   title: true,
+   description: true,
+   long_description: true,
+   price: true,
+};
+
 const router = Router();
 const uploadMiddleware = upload("package");
 
 router.get("/", async (req, res, next) => {
    try {
-      const banner = await prisma.package.findMany({
+      const data = await prisma.package.findMany({
          orderBy: { createdAt: "desc" },
-         select: {
-            id: true,
-            image: true,
-            alt: true,
-            title: true,
-            description: true,
-            long_description: true,
-            price: true,
-         },
+         select: columns,
       });
 
       res.status(200).json({
-         data: banner,
+         data,
+      });
+   } catch (error) {
+      errorHandler(error as Error, req, res);
+      next(error);
+   }
+});
+
+router.get("/:id", async (req, res, next) => {
+   try {
+      const data = await prisma.package.findUnique({
+         where: { id: req.params.id },
+         select: columns,
+      });
+
+      res.status(200).json({
+         data,
       });
    } catch (error) {
       errorHandler(error as Error, req, res);

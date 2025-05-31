@@ -11,6 +11,8 @@ import expertsSliceReducer from "./features/experts-slice";
 import productsSliceReducer from "./features/products-slice";
 import blogsSliceReducer from "./features/blogs-slice";
 import aboutSliceReducer from "./features/about-slice";
+import pagesBannerSliceReducer from "./features/pages-banner-slice";
+import seoSliceReducer from "./features/seo-slice";
 
 export const LOGOUT = "LOGOUT";
 
@@ -25,6 +27,8 @@ const appReducer = combineReducers({
    products: productsSliceReducer,
    blogs: blogsSliceReducer,
    about: aboutSliceReducer,
+   pagesBanner: pagesBannerSliceReducer,
+   seoTags: seoSliceReducer,
 });
 
 const rootReducer = (

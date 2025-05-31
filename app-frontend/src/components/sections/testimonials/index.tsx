@@ -22,7 +22,7 @@ export default function Testimonials({
             <div className="mt-6">
                <CarouselSlider
                   id="testimonials-slider"
-                  carouselContentClassName="justify-stretch max-w-[100%]"
+                  carouselContentClassName="justify-center max-w-full"
                   togglerPosition="bottom"
                >
                   {testimonialsData.map((testimonial, index) => (

@@ -7,7 +7,7 @@ import {
   // FaUsers,
   // FaAddressBook,
   FaInfoCircle,
-  // FaThList,
+  FaThList,
   FaBlog,
   FaBriefcase
 } from "react-icons/fa";
@@ -85,11 +85,11 @@ const items = [
     url: "/dashboard/experts",
     icon: FaBriefcase,
   },
-  // {
-  //   title: "Miscellaneous",
-  //   url: "/dashboard/miscellaneous",
-  //   icon: FaThList,
-  // },
+  {
+    title: "Miscellaneous",
+    url: "/dashboard/miscellaneous",
+    icon: FaThList,
+  },
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

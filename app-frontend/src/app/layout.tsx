@@ -24,7 +24,7 @@ export default function RootLayout({
          <html lang="en">
             <body className={`${font.variable} antialiased`}>
                <Layout>
-                  <main className="min-h-screen">{children}</main>
+                  <main>{children}</main>
                </Layout>
             </body>
          </html>

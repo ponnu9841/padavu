@@ -19,10 +19,11 @@ import PagesBanner from "./routes/pages-banner";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT ?? 8000;
+const allowedOrgins = process.env.ALLOWED_ORIGINS?.split(",") || [];
 app.use(
    cors({
       origin: function (origin, callback) {
-         const allowedOrigins = ["http://localhost:3000"];
+         const allowedOrigins = allowedOrgins;
          if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
          } else {

@@ -1,5 +1,9 @@
 import axios from "axios";
-const axiosInstance = axios;
+const axiosInstance = axios.create({
+   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`,
+   timeout: 30000,
+   withCredentials: true,
+});;
 
 let cachedBanners: Banner[] | null = null;
 let cachedExperts: Experts[] | null = null;

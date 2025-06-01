@@ -1,4 +1,5 @@
-import axiosInstance from "./axios";
+import axios from "axios";
+const axiosInstance = axios;
 
 let cachedBanners: Banner[] | null = null;
 let cachedExperts: Experts[] | null = null;
@@ -214,4 +215,3 @@ export async function getProductById(id: string): Promise<Product | null> {
       return null;
    }
 }
-

@@ -7,6 +7,7 @@ import { fetchUser } from "@/store/features/user-slice";
 import { useAppDispatch } from "@/hooks/use-store";
 import { useAppSelector } from "@/hooks/use-store";
 import { handleToast } from "@/lib/handleErrorToast";
+import BuildApplication from "./build";
 
 const extractPathTitle = (path: string) => {
 	const pathParts = path.split("/");
@@ -43,15 +44,16 @@ export default function DashBoardLayout({ children }: ReactChildren) {
 		return (
 			<SidebarProvider>
 				<AppSidebar />
-				<div className="my-4 mx-3 flex-1">
-					<div className="flex gap-x-2 items-center">
+				<div className="flex-1">
+					<div className="py-4 px-3 flex gap-x-2 items-center sticky top-0 bg-background z-50 border-b">
 						<SidebarTrigger />
 
 						<div className="flex-1 flex justify-between">
 							<h1 className="text-xl font-semibold">{extractPathTitle(router.pathname)}</h1>
 						</div>
+						<BuildApplication />
 					</div>
-					<div className="p-5 px-2">{children}</div>
+					<div className="p-5 px-2 mx-3 ">{children}</div>
 				</div>
 			</SidebarProvider>
 		);

@@ -112,12 +112,12 @@ export default function BannerForm() {
             <div className="mt-4">
                <FormField
                   control={form.control}
-                  name="title"
+                  name="imageAlt"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Title</FormLabel>
+                        <FormLabel>Image Alt</FormLabel>
                         <FormControl>
-                           <Input {...field} placeholder="Enter Title" />
+                           <Input {...field} placeholder="Enter Image Alt" />
                         </FormControl>
                         <FormMessage />
                      </FormItem>

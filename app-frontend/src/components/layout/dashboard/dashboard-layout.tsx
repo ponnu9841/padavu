@@ -7,7 +7,7 @@ import { fetchUser } from "@/store/features/user-slice";
 import { useAppDispatch } from "@/hooks/use-store";
 import { useAppSelector } from "@/hooks/use-store";
 import { handleToast } from "@/lib/handleErrorToast";
-import BuildApplication from "./build";
+// import BuildApplication from "./build";
 
 const extractPathTitle = (path: string) => {
 	const pathParts = path.split("/");
@@ -38,7 +38,7 @@ export default function DashBoardLayout({ children }: ReactChildren) {
 			handleToast("You are not authorized to access this page");
 			return
 		}
-	}, [user, router]);
+	}, [user]); //eslint-disable-line
 
 	if (user.type === "admin") {
 		return (
@@ -51,7 +51,7 @@ export default function DashBoardLayout({ children }: ReactChildren) {
 						<div className="flex-1 flex justify-between">
 							<h1 className="text-xl font-semibold">{extractPathTitle(router.pathname)}</h1>
 						</div>
-						<BuildApplication />
+						{/* <BuildApplication /> */}
 					</div>
 					<div className="p-5 px-2 mx-3 ">{children}</div>
 				</div>

@@ -42,9 +42,9 @@ export default function BuildApplication() {
             setData(accumulatedData);
          }
 
-         if (response) {
-            window.location.reload();
-         }
+         // if (response) {
+         //    window.location.reload();
+         // }
       } catch (error) {
          console.log(error);
       } finally {

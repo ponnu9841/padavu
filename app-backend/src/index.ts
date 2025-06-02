@@ -46,7 +46,8 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Middleware to parse URL-encoded bodies
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 app.get("/health", (req, res) => {
    res.send("Hello World!");

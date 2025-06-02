@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import NextImage from "@/components/Image";
 import parse from "html-react-parser";
 import { getPackageById } from "@/lib/get-data";

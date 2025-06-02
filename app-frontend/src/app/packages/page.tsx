@@ -1,7 +1,8 @@
+export const dynamic = "force-dynamic";
 import BannerPages from "@/components/banner-pages";
 import NextImage from "@/components/Image";
 import { Button } from "@/components/ui/button";
-import { getPackagesData, getPagesBannersResponse } from "@/lib/get-data";
+import { getPackagesResponse, getPagesBannersResponse } from "@/lib/get-data";
 import { getCurrentPageBanner } from "@/lib/utils";
 import parse from "html-react-parser";
 import Link from "next/link";
@@ -9,7 +10,7 @@ import Link from "next/link";
 const ExpertsPage = async () => {
    const [banners, packagesData] = await Promise.all([
       getPagesBannersResponse(),
-      getPackagesData(),
+      getPackagesResponse(),
    ]);
    const currentBanner = banners
       ? getCurrentPageBanner(banners, "packages")

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import BannerPages from "@/components/banner-pages";
 import NextImage from "@/components/Image";
 import { Button } from "@/components/ui/button";

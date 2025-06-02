@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import About from "@/components/sections/about";
 import Clients from "@/components/sections/clients";
 import Experts from "@/components/sections/experts";

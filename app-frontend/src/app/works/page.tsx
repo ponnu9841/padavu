@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import BannerPages from "@/components/banner-pages";
 import WorksList from "@/components/sections/works-list";
 import { getPagesBannersResponse } from "@/lib/get-data";

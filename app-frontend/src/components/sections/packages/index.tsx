@@ -40,7 +40,11 @@ export default function Packages() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
                {packages?.map((item) => (
                   <div className="text-center" key={item.id}>
-                     <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                     <AnimatedTypography
+                        variant="h3"
+                        text={item.title}
+                        className="mb-3"
+                     />
                      <div className="relative mb-2">
                         <NextImage
                            className="aspect-square lg:aspect-[3/2] h-full"

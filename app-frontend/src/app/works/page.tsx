@@ -18,7 +18,7 @@ const ExpertsPage = async () => {
             alt={currentBanner?.alt || ""}
          />
          <div className="container my-10">
-            <WorksList />
+            <WorksList showPagination />
          </div>
       </>
    );

@@ -24,7 +24,7 @@ import {
    getProductsResponse,
    getTestimonialsResponse,
    getVisionResponse,
-   getWorksResponse,
+   // getWorksResponse,
 } from "@/lib/get-data";
 
 const Home = async () => {
@@ -36,7 +36,7 @@ const Home = async () => {
       missionData,
       visionData,
       clientsData,
-      worksData,
+      // worksData,
       testimonialsData,
       productsData,
       blogData,
@@ -48,7 +48,7 @@ const Home = async () => {
       getMissionResponse(),
       getVisionResponse(),
       getClientsResponse(),
-      getWorksResponse(),
+      // getWorksResponse(),
       getTestimonialsResponse(),
       getProductsResponse(),
       getBlogsResponse(),
@@ -84,7 +84,7 @@ const Home = async () => {
          {clientsData && <Clients clientsData={clientsData} />}
 
          {/* Works */}
-         {worksData && <Works worksData={worksData} />}
+         <Works />
 
          {/* Testimonials Section */}
          {testimonialsData && <Testimonials testimonialsData={testimonialsData} />}

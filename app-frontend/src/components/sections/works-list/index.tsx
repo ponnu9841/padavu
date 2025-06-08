@@ -65,19 +65,18 @@ export default function WorksList({
                         </ZoomAnimation>
                      </div>
                   ))}
-
-                  {!loading && data?.data.length && showPagination ? (
-                     <div className="mt-6 flex justify-center">
-                        <Pagination
-                           pageNo={pageNo}
-                           setPageNo={(pageNo) => dispatch(setPageNo(pageNo))}
-                           totalPages={lastPage || 1}
-                        />
-                     </div>
-                  ) : (
-                     <></>
-                  )}
                </div>
+            )}
+            {!loading && data?.data.length && showPagination ? (
+               <div className="mt-6 flex justify-center">
+                  <Pagination
+                     pageNo={pageNo}
+                     setPageNo={(pageNo) => dispatch(setPageNo(pageNo))}
+                     totalPages={lastPage || 1}
+                  />
+               </div>
+            ) : (
+               <></>
             )}
          </div>
          {data?.data.length && (

@@ -44,7 +44,7 @@ export default function WorksList({
             )}
 
             {!loading && data?.data.length && (
-               <div className="grid grid-cols-1 md:grid-cols-3 lg: grid-cols-4 gap-4">
+               <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                   {data?.data.map((image, index) => (
                      <div
                         key={index}

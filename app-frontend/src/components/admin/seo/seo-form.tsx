@@ -70,7 +70,7 @@ export default function SeoForm({ page }: { page: string }) {
                   name="title"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Image</FormLabel>
+                        <FormLabel>Title</FormLabel>
                         <FormControl>
                            <Input type="text" {...field} placeholder="Title" />
                         </FormControl>
@@ -83,7 +83,7 @@ export default function SeoForm({ page }: { page: string }) {
                   name="description"
                   render={({ field }) => (
                      <FormItem>
-                        <FormLabel>Image</FormLabel>
+                        <FormLabel>Description</FormLabel>
                         <FormControl>
                            <Textarea {...field} placeholder="Description" />
                         </FormControl>

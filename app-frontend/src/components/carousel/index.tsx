@@ -11,7 +11,7 @@ import {
 import Image from "next/image";
 import { RenderCarouselItem } from "./carousel-item";
 import { cn } from "@/lib/utils";
-import { RenderElement } from "@/components/render-element";
+import { RenderBackground, RenderElement } from "@/components/render-element";
 
 const CarouselSlider = (props: CarouselSliderProps) => {
    const {
@@ -26,6 +26,7 @@ const CarouselSlider = (props: CarouselSliderProps) => {
       togglerPosition = "default",
       showTitle = false,
       enableScroll = false,
+      renderBackground = false,
    } = props;
    const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
@@ -88,6 +89,7 @@ const CarouselSlider = (props: CarouselSliderProps) => {
                carouselContentClassName
             )}
          >
+            {renderBackground && <RenderBackground />}
             {images?.map((image, index) => (
                <RenderCarouselItem
                   key={index}
@@ -106,8 +108,7 @@ const CarouselSlider = (props: CarouselSliderProps) => {
                   {!!children && children}
                   {showTitle && (
                      <>
-                        <div className="absolute bottom-10 md:bottom-20 lg:bottom-40 left-0 w-full h-1/2 z-2 bg-[linear-gradient(180deg,_transparent_0%,_var(--secondary)_50%)]"></div>
-                        <div className="absolute top-1/3 left-0 px-10 md:px-32 text-white z-3">
+                        <div className="absolute top-1/3 left-0 px-10 md:px-32 text-white z-50">
                            {image.title && (
                               <RenderElement
                                  variant="h1"

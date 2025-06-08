@@ -12,12 +12,14 @@ import { useState } from "react";
 
 export const navItems = [
    { name: "Home", link: "/" },
+   { name: "Expertism", link: "/experts" },  
+   { name: "Packages", link: "/packages" },
    { name: "About", link: "/about" },
-   { name: "Services", link: "/services" },
-   { name: "Gallery", link: "/gallery" },
+   { name: "Clients", link: "/clients" },
+   { name: "Works", link: "/works" },
+   { name: "Products", link: "/products" },
    { name: "Blog", link: "/blog" },
    { name: "Contact", link: "/contact" },
-   { name: "Careers", link: "/careers" },
 ];
 
 export default function NavigationMenu() {

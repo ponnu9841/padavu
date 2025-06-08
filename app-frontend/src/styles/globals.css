@@ -202,8 +202,8 @@
       font-weight: 700;
    }
 
-   h2 {
-      font-size: clamp(1.875rem, 1.5rem + 1.875vw, 2.25rem);
+   h2, h2 span {
+      font-size: clamp(1rem, 1.5rem + 1.875vw, 2.25rem);
       line-height: 1.3;
       font-weight: 700;
    }

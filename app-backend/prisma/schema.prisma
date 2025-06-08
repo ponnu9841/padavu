@@ -118,7 +118,7 @@ model Product {
 model Blog {
   id        String   @id @default(uuid())
   image     String   @db.VarChar(255)
-  alt       String   @db.VarChar(255)
+  alt       String?  @db.VarChar(255)
   title     String   @db.VarChar(255)
   content   String
   createdAt DateTime @default(now()) @map("created_at")
@@ -171,4 +171,29 @@ model PagesBanner {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("pages_banners")
+}
+
+model Seo {
+  id          String   @id @default(uuid())
+  title       String   @db.VarChar(255)
+  description String
+  page        String   @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("seo")
+}
+
+model Contact {
+  id            String   @id @default(uuid())
+  location      String
+  contactno_one String
+  contactno_two String?
+  email_one     String
+  email_two     String?
+  map           String?
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("contacts")
 }

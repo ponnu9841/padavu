@@ -6,7 +6,13 @@ import parse from "html-react-parser";
 export const ShadowGradient = () => (
    <div className="absolute inset-0 md:bg-[linear-gradient(90deg,_rgba(255,255,255,1)_0%,_rgba(255,255,255,0.1)_30%,_rgba(255,255,255,0)_100%)]" />
 );
-export default function About({ aboutData }: { aboutData: About }) {
+export default function About({
+   aboutData,
+   showLongDescription = false,
+}: {
+   aboutData: About;
+   showLongDescription?: boolean;
+}) {
    return (
       <section className="py-10 px-4 flex flex-col md:flex-row gap-4 md:gap-8 max-w-6xl mx-auto">
          <div className="md:w-1/2">
@@ -22,6 +28,13 @@ export default function About({ aboutData }: { aboutData: About }) {
                   {parse(aboutData?.short_description || "")}
                </div>
             </AnimateElement>
+            {showLongDescription && (
+               <AnimateElement animation="fadeInUp">
+                  <div className="text-primary">
+                     {parse(aboutData?.long_description || "")}
+                  </div>
+               </AnimateElement>
+            )}
          </div>
          <div className="md:w-1/2 relative">
             <NextImage

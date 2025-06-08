@@ -202,11 +202,28 @@ export const pagesBannerSchema = z
    });
 
 export const seoSchema = z.object({
-	id: z.string().optional(),
-	title: z.string().min(3, "Title must be at least 3 characters"),
-	description: z.string().min(3, "Title must be at least 3 characters"),
-	page: z.string(),
-})
+   id: z.string().optional(),
+   title: z.string().min(3, "Title must be at least 3 characters"),
+   description: z.string().min(3, "Title must be at least 3 characters"),
+   page: z.string(),
+});
+
+export const contactSchema = z.object({
+   id: z.string().optional(),
+   location: z.string().min(3, "Location must be at least 3 characters"),
+   contactOne: z.string().regex(/^\d{10}$/, {
+      message: "Phone number must be exactly 10 digits",
+   }),
+   contactTwo: z.string().optional(),
+   emailOne: z
+      .string()
+      .min(1, { message: "This field has to be filled." })
+      .email("This is not a valid email."),
+   emailTwo: z.string().optional(),
+   map: z.string().optional(),
+});
+
+export type ContactFormData = z.infer<typeof contactSchema>;
 
 export type SeoFormData = z.infer<typeof seoSchema>;
 

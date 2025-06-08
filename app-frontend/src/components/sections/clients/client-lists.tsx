@@ -16,7 +16,7 @@ export default function ClientLists({
                   <NextImage
                      src={client.image}
                      alt={client.alt || ""}
-                     className="w-full min-w-[10.625rem] aspect-square"
+                     className="w-full min-w-[8rem] lg:min-w-[10.625rem] aspect-square"
                   />
                </ZoomAnimation>
             </li>

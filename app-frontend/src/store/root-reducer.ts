@@ -13,6 +13,7 @@ import blogsSliceReducer from "./features/blogs-slice";
 import aboutSliceReducer from "./features/about-slice";
 import pagesBannerSliceReducer from "./features/pages-banner-slice";
 import seoSliceReducer from "./features/seo-slice";
+import contactSliceReducer from "./features/contact-slice";
 
 export const LOGOUT = "LOGOUT";
 
@@ -29,6 +30,7 @@ const appReducer = combineReducers({
    about: aboutSliceReducer,
    pagesBanner: pagesBannerSliceReducer,
    seoTags: seoSliceReducer,
+   contact: contactSliceReducer,
 });
 
 const rootReducer = (

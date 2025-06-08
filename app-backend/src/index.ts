@@ -15,6 +15,8 @@ import About from "./routes/about";
 import Mission from "./routes/mission";
 import Vision from "./routes/vision";
 import PagesBanner from "./routes/pages-banner";
+import Seo from "./routes/seo";
+import Contact from "./routes/contact";
 
 dotenv.config();
 const app = express();
@@ -46,8 +48,8 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // Middleware to parse URL-encoded bodies
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.get("/health", (req, res) => {
    res.send("Hello World!");
@@ -67,6 +69,8 @@ app.use("/api/about", About);
 app.use("/api/mission", Mission);
 app.use("/api/vision", Vision);
 app.use("/api/pagesBanner", PagesBanner);
+app.use("/api/seoTags", Seo);
+app.use("/api/contact", Contact);
 
 app.listen(PORT, () =>
    console.log(`🚀 Server is running at http://localhost:${PORT}`)

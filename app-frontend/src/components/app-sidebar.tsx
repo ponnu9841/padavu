@@ -5,7 +5,7 @@ import {
   FaComments,
   FaImages,
   // FaUsers,
-  // FaAddressBook,
+  FaAddressBook,
   FaInfoCircle,
   FaThList,
   FaBlog,
@@ -40,11 +40,11 @@ const items = [
     url: "/dashboard/about",
     icon: FaInfoCircle,
   },
-  {
-    title: "Packages",
-    url: "/dashboard/packages",
-    icon: FaInfoCircle,
-  },
+  // {
+  //   title: "Packages",
+  //   url: "/dashboard/packages",
+  //   icon: FaInfoCircle,
+  // },
   {
     title: "Clients",
     url: "/dashboard/clients",
@@ -70,11 +70,11 @@ const items = [
   //   url: "/dashboard/teams",
   //   icon: FaUsers,
   // },
-  // {
-  //   title: "Contact",
-  //   url: "/dashboard/contact",
-  //   icon: FaAddressBook,
-  // },
+  {
+    title: "Contact",
+    url: "/dashboard/contact",
+    icon: FaAddressBook,
+  },
   {
     title: "Blogs",
     url: "/dashboard/blogs",

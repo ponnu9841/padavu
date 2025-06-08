@@ -25,6 +25,7 @@ type CarouselSliderProps = CarouselCardProps & {
    togglerPosition?: string;
    showTitle?: boolean;
    enableScroll?: boolean;
+   renderBackground?: boolean;
 };
 
 type Testimonial = {
@@ -164,3 +165,21 @@ type Heading = {
    description: string | null;
    section: string;
 };
+
+type Seo = {
+   id: string;
+   title: string;
+   description: string;
+   page: string;
+}
+
+type Contact = {
+   id: string;
+   location: string;
+   map: string | null;
+   contactno_one: string;
+   contactno_two: string | null;
+   email_one: string;
+   email_two: string | null;
+};
+

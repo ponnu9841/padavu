@@ -3,7 +3,7 @@ import Clients from "@/components/sections/clients";
 import { getClientsResponse, getPagesBannersResponse } from "@/lib/get-data";
 import { generatePageMetadata, getCurrentPageBanner } from "@/lib/utils";
 
-export const generateMetadata = () => generatePageMetadata("contact");
+export const generateMetadata = () => generatePageMetadata("clients");
 
 export default async function ClientsPage() {
    const [banners, clientsData] = await Promise.all([

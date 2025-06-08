@@ -26,6 +26,9 @@ import {
    getVisionResponse,
    // getWorksResponse,
 } from "@/lib/get-data";
+import { generatePageMetadata } from "@/lib/utils";
+
+export const generateMetadata = () => generatePageMetadata("home");
 
 const Home = async () => {
    const [

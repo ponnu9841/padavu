@@ -9,7 +9,9 @@ import {
    getPagesBannersResponse,
    getVisionResponse,
 } from "@/lib/get-data";
-import { getCurrentPageBanner } from "@/lib/utils";
+import { generatePageMetadata, getCurrentPageBanner } from "@/lib/utils";
+
+export const generateMetadata = () => generatePageMetadata("about");
 
 const AboutPage = async () => {
    const [aboutData, missionData, visionData, banners] = await Promise.all([

@@ -65,7 +65,7 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bed, ChefHat, Utensils, Sofa, Baby, Users } from "lucide-react";
 import { getPagesBannersResponse } from "@/lib/get-data";
-import { getCurrentPageBanner } from "@/lib/utils";
+import { generatePageMetadata, getCurrentPageBanner } from "@/lib/utils";
 import BannerPages from "@/components/banner-pages";
 import Link from "next/link";
 
@@ -543,6 +543,8 @@ const packageData = {
       ],
    },
 };
+
+export const generateMetadata = () => generatePageMetadata("packages");
 
 export default async function PackageDisplay() {
    const banners = await getPagesBannersResponse();

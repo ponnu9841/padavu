@@ -3,9 +3,11 @@ import BannerPages from "@/components/banner-pages";
 import NextImage from "@/components/Image";
 import { Button } from "@/components/ui/button";
 import { getPagesBannersResponse, getProductsResponse } from "@/lib/get-data";
-import { cn, getCurrentPageBanner, isEven } from "@/lib/utils";
+import { cn, generatePageMetadata, getCurrentPageBanner, isEven } from "@/lib/utils";
 import parse from "html-react-parser";
 import Link from "next/link";
+
+export const generateMetadata = () => generatePageMetadata("products");
 
 const ExpertsPage = async () => {
    const [banners, packagesData] = await Promise.all([

@@ -2,6 +2,9 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { contactData as ContactData } from "./constants";
 
+const pages = ["home", "expertism", "packages", "about", "clients", "works", "blogs", "products", "contact"] as const;
+type PageKey = (typeof pages)[number];
+
 export function cn(...inputs: ClassValue[]) {
    return twMerge(clsx(inputs));
 }
@@ -12,7 +15,7 @@ export function capitalizeFirstLetter(str: string): string {
 }
 
 export function getPages() {
-   return ["expertism", "packages", "about", "clients", "works", "products", "contact"];
+   return pages;
 }
 
 export function getCurrentPageBanner(banners: PagesBanner[], page: string) {
@@ -84,7 +87,7 @@ export const getContact = (contact: Contact) => {
 import { Metadata } from "next";
 import { getSeoTagsResponse } from "./get-data";
 
-export async function generatePageMetadata(pageKey: string): Promise<Metadata> {
+export async function generatePageMetadata(pageKey: PageKey): Promise<Metadata> {
    const metaTags = await getSeoTagsResponse();
    const currentMetaTag = getCurrentMetaTag(metaTags, pageKey);
 

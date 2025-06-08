@@ -2,7 +2,9 @@ export const dynamic = "force-dynamic";
 import BannerPages from "@/components/banner-pages";
 import WorksList from "@/components/sections/works-list";
 import { getPagesBannersResponse } from "@/lib/get-data";
-import { getCurrentPageBanner } from "@/lib/utils";
+import { generatePageMetadata, getCurrentPageBanner } from "@/lib/utils";
+
+export const generateMetadata = () => generatePageMetadata("works");
 
 const ExpertsPage = async () => {
    const banners = await getPagesBannersResponse();

@@ -2,6 +2,7 @@ import AnimatedTypography from "@/components/animation/animated-typography";
 import NextImage from "@/components/Image";
 import { Button } from "@/components/ui/button";
 import parse from "html-react-parser";
+import Link from "next/link";
 
 const packages = [
    {
@@ -59,12 +60,14 @@ export default function Packages() {
                            ₹{item.price}
                         </p>
                      </div>
-                     <Button
-                        className="rounded-full text-lg font-semibold tracking-wider px-10 py-6"
-                        size="lg"
-                     >
-                        Details
-                     </Button>
+                     <Link href="/packages">
+                        <Button
+                           className="rounded-full text-lg font-semibold tracking-wider px-10 py-6"
+                           size="lg"
+                        >
+                           Details
+                        </Button>
+                     </Link>
                   </div>
                ))}
             </div>

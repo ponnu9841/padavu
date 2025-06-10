@@ -27,11 +27,12 @@ const CarouselSlider = (props: CarouselSliderProps) => {
       showTitle = false,
       enableScroll = false,
       renderBackground = false,
+      loop = true,
    } = props;
    const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
 
    const opts = {
-      loop: true,
+      loop,
    };
 
    const hasPadding = carouselItemClassName?.includes("pl-");
@@ -102,7 +103,7 @@ const CarouselSlider = (props: CarouselSliderProps) => {
                      fill
                      alt="banner"
                      className="object-cover"
-                     sizes="60vw(min-width: 768px) 70vw"
+                     sizes="(min-width: 768px)60vw, 70vw"
                      priority={index === 0}
                   />
                   {!!children && children}

@@ -26,6 +26,7 @@ type CarouselSliderProps = CarouselCardProps & {
    showTitle?: boolean;
    enableScroll?: boolean;
    renderBackground?: boolean;
+   loop?: boolean;
 };
 
 type Testimonial = {

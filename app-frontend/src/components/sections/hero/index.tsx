@@ -39,6 +39,7 @@ export default function Hero({ banners }: { banners: Banner[] | null }) {
                id="home-slider"
                showTitle
                renderBackground
+               loop={false}
             ></CarouselSlider>
             <div className="absolute left-3 bottom-3 lg:left-20 lg:bottom-20 grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-6 max-w-[calc(100%-1.5rem)]">
                {stats.map((stat, index) => (

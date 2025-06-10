@@ -1,6 +1,6 @@
 import AnimatedTypography from "@/components/animation/animated-typography";
-// import { Button } from "@/components/ui/button";
-// import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import React from "react";
 import ClientLists from "./client-lists";
 
@@ -15,9 +15,9 @@ export default function Clients({ clientsData }: { clientsData: Client[] }) {
          />
 
          {clientsData && <ClientLists clientsData={clientsData} />}
-         {/* <Link href="#" className="flex justify-center">
+         <Link href="/clients" className="flex justify-center">
             <Button size="lg">View More</Button>
-         </Link> */}
+         </Link>
       </section>
    );
 }

@@ -1,0 +1,50 @@
+name: Deploy vision-frontend
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: ${{ secrets.EC2_PORT || 22 }}
+        script: |
+          echo "Switching to ubuntu user and running deployment..."
+          sudo -u ubuntu bash << 'EOF'
+          
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+          echo "Node version:"
+          node -v
+
+          echo "Installing yarn"
+          npm install --global yarn
+
+          echo "Navigating to Next.js frontend directory..."
+          cd /home/ubuntu/padavu
+          git config --global --add safe.directory /home/ubuntu/padavu
+
+          echo "Pulling latest code from master branch..."
+          git pull
+
+          cd app-frontend
+          
+          echo "Installing dependencies with Yarn..."
+          yarn install --frozen-lockfile
+
+          echo "Building Next.js project..."
+          yarn build
+
+          echo "Restarting PM2 process..."
+          pm2 restart padavu-frontend
+
+          echo "✅ Next.js Deployment completed successfully!"
+          EOF

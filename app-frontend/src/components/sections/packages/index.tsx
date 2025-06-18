@@ -30,7 +30,7 @@ const packages = [
 
 export default function Packages() {
    return (
-      <section className="relative text-primary ">
+      <section className="relative text-primary">
          <div className="p-5 md:p-10">
             <AnimatedTypography
                variant="h2"

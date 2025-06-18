@@ -3,98 +3,99 @@ name: Deploy padavu monorepo
 on:
   push:
     branches: [master]
-    paths:
-      - 'app-frontend/**'
-      - 'app-backend/**'
 
 jobs:
   deploy-frontend:
-    if: ${{ contains(github.event.head_commit.message, 'app-frontend') || github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
     name: Deploy app-frontend
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    paths:
+      - 'app-frontend/**'
 
     steps:
-    - name: Deploy to EC2 - Frontend
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        port: ${{ secrets.EC2_PORT || 22 }}
-        script: |
-          echo "Switching to ubuntu user and running frontend deployment..."
-          sudo -u ubuntu bash << 'EOF'
+      - name: Deploy to EC2 - Frontend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT || 22 }}
+          script: |
+            echo "Switching to ubuntu user and running frontend deployment..."
+            sudo -u ubuntu bash << 'EOF'
 
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-          echo "Node version:"
-          node -v
+            echo "Node version:"
+            node -v
 
-          echo "Installing yarn"
-          npm install --global yarn
+            echo "Installing yarn"
+            npm install --global yarn
 
-          echo "Navigating to project root..."
-          cd /home/ubuntu/padavu
-          git config --global --add safe.directory /home/ubuntu/padavu
+            echo "Navigating to project root..."
+            cd /home/ubuntu/padavu
+            git config --global --add safe.directory /home/ubuntu/padavu
 
-          echo "Pulling latest code..."
-          git pull
+            echo "Pulling latest code..."
+            git pull
 
-          cd app-frontend
+            cd app-frontend
 
-          echo "Installing dependencies with Yarn..."
-          yarn install --frozen-lockfile
+            echo "Installing dependencies with Yarn..."
+            yarn install --frozen-lockfile
 
-          echo "Building Next.js frontend..."
-          yarn build
+            echo "Building Next.js frontend..."
+            yarn build
 
-          echo "Restarting PM2 process for frontend..."
-          pm2 restart padavu-frontend
+            echo "Restarting PM2 process for frontend..."
+            pm2 restart padavu-frontend
 
-          echo "✅ Frontend deployment completed!"
-          EOF
+            echo "✅ Frontend deployment completed!"
+            EOF
 
   deploy-backend:
-    if: ${{ contains(github.event.head_commit.message, 'app-backend') || github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
     name: Deploy app-backend
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    paths:
+      - 'app-backend/**'
 
     steps:
-    - name: Deploy to EC2 - Backend
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        port: ${{ secrets.EC2_PORT || 22 }}
-        script: |
-          echo "Switching to ubuntu user and running backend deployment..."
-          sudo -u ubuntu bash << 'EOF'
+      - name: Deploy to EC2 - Backend
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT || 22 }}
+          script: |
+            echo "Switching to ubuntu user and running backend deployment..."
+            sudo -u ubuntu bash << 'EOF'
 
-          export NVM_DIR="$HOME/.nvm"
-          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-          echo "Node version:"
-          node -v
+            echo "Node version:"
+            node -v
 
-          echo "Navigating to project root..."
-          cd /home/ubuntu/padavu
-          git config --global --add safe.directory /home/ubuntu/padavu
+            echo "Navigating to project root..."
+            cd /home/ubuntu/padavu
+            git config --global --add safe.directory /home/ubuntu/padavu
 
-          echo "Pulling latest code..."
-          git pull
+            echo "Pulling latest code..."
+            git pull
 
-          cd app-backend
+            cd app-backend
 
-          echo "Installing dependencies with npm..."
-          npm install
+            echo "Installing dependencies with npm..."
+            npm install
 
-          echo "Building backend..."
-          npm run build
+            echo "Building backend..."
+            npm run build
 
-          echo "Restarting PM2 process for backend..."
-          pm2 restart padavu-backend
+            echo "Restarting PM2 process for backend..."
+            pm2 restart padavu-backend
 
-          echo "✅ Backend deployment completed!"
-          EOF
+            echo "✅ Backend deployment completed!"
+            EOF

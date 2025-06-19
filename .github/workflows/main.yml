@@ -27,8 +27,23 @@ jobs:
           echo "Node version:"
           node -v
 
-          echo "Installing yarn"
-          npm install --global yarn
+          echo "Deploy backend"
+          cd ../app-backend
+
+          echo "Installing dependencies with npm..."
+          npm install
+
+          echo "Prisma migration..."
+          npx prisma migrate deploy
+          npx prisma generate
+
+          echp "Building Express project..."
+          npm run build
+
+          echo "Restarting PM2 process..."
+          pm2 restart padavu-backend
+
+          echo "✅ Express.js Deployment completed successfully!"
 
           echo "Navigating to Next.js frontend directory..."
           cd /home/ubuntu/padavu
@@ -49,19 +64,5 @@ jobs:
           pm2 restart padavu-frontend
 
           echo "✅ Next.js Deployment completed successfully!"
-
-          echo "Deploy backend"
-          cd ../app-backend
-
-          echo "Installing dependencies with npm..."
-          npm install
-
-          echp "Building Express project..."
-          npm run build
-
-          echo "Restarting PM2 process..."
-          pm2 restart padavu-backend
-
-          echo "✅ Express.js Deployment completed successfully!"
           
           EOF

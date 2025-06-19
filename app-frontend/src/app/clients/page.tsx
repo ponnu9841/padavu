@@ -1,15 +1,12 @@
 import BannerPages from "@/components/banner-pages";
-import Clients from "@/components/sections/clients";
-import { getClientsResponse, getPagesBannersResponse } from "@/lib/get-data";
+import { getPagesBannersResponse } from "@/lib/get-data";
 import { generatePageMetadata, getCurrentPageBanner } from "@/lib/utils";
+import ClientsData from "./clients-data";
 
 export const generateMetadata = () => generatePageMetadata("clients");
 
 export default async function ClientsPage() {
-   const [banners, clientsData] = await Promise.all([
-      getPagesBannersResponse(),
-      getClientsResponse(),
-   ]);
+   const banners = await getPagesBannersResponse()
 
    const currentBanner = banners
       ? getCurrentPageBanner(banners, "contact")
@@ -23,7 +20,7 @@ export default async function ClientsPage() {
             alt={currentBanner?.alt}
          />
          <section className="container my-24">
-            {clientsData && <Clients clientsData={clientsData} />}
+            <ClientsData />
          </section>
       </>
    );

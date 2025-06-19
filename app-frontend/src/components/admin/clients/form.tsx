@@ -65,7 +65,7 @@ export default function ClientsForm() {
          .finally(() => setLoading(false));
       function successCB() {
          resetForm();
-         dispatch(fetchClient());
+         dispatch(fetchClient({ pageNo: 1 }));
       }
    };
 

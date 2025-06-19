@@ -3,20 +3,23 @@ import { Skeleton } from "@/components/ui/skeleton";
 import React from "react";
 import { DeleteDrawer } from "../delete-drawer";
 import axiosInstance from "@/lib/axios";
-import { fetchClient, setSelectedClient } from "@/store/features/clients-slice";
+import { fetchClient, setPageNo, setSelectedClient } from "@/store/features/clients-slice";
 import EditButton from "../edit-button";
 import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
+import { Pagination } from "@/components/pagination";
 
 export default function ClientsData() {
    const dispatch = useAppDispatch();
-   const { loading, data } = useAppSelector((state) => state.clients);
+   const { loading, pageNo, data } = useAppSelector((state) => state.clients);
+
+   const lastPage = data?.totalPages;
 
    const deletePartner = async (id: string, image: string) => {
       const response = await axiosInstance.delete(`/clients`, {
          params: { id, image },
       });
       if (response && response.status === 200) {
-         dispatch(fetchClient());
+         dispatch(fetchClient({ pageNo: 1 }));
       }
    };
 
@@ -25,7 +28,7 @@ export default function ClientsData() {
          <h2 className="text-xl">Uploaded Images</h2>
 
          <div className="grid grid-cols-4 gap-6 max-h-[500px] overflow-auto">
-            {!loading && data.length === 0 && (
+            {!loading && data?.data.length === 0 && (
                <div className="col-span-4 text-center mt-3 text-red-500">
                   No Record Found
                </div>
@@ -37,7 +40,7 @@ export default function ClientsData() {
                      <Skeleton key={index} className="aspect-square" />
                   ))}
             {!loading &&
-               data.map((client) => (
+               data?.data.map((client) => (
                   <div key={client.id} className="relative flex justify-center">
                      <NextImage
                         src={client.image}
@@ -60,6 +63,17 @@ export default function ClientsData() {
                   </div>
                ))}
          </div>
+         {!loading && data?.data.length ? (
+            <div className="mt-6">
+               <Pagination
+                  pageNo={pageNo}
+                  setPageNo={(pageNo) => dispatch(setPageNo(pageNo))}
+                  totalPages={lastPage || 1}
+               />
+            </div>
+         ) : (
+            <></>
+         )}
       </div>
    );
 }

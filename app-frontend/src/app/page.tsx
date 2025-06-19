@@ -84,7 +84,7 @@ const Home = async () => {
          {visionData && <Vision visionData={visionData} />}
 
          {/* Clients */}
-         {clientsData && <Clients clientsData={clientsData} />}
+         {clientsData && <Clients clientsData={clientsData} showButton />}
 
          {/* Works */}
          <Works />

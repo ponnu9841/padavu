@@ -5,20 +5,34 @@ import { deleteFileFromUrl, extractFilePath } from "../utils/file";
 import prisma from "../utils/prisma";
 import { deleteRecord } from "../utils/delete-request";
 import { errorHandler } from "../utils/error-handler";
+import {
+   createPaginatedResponse,
+   getPaginationParams,
+} from "../utils/pagination";
 
 const router = Router();
 const uploadMiddleware = upload("client");
 
 router.get("/", async (req, res, next) => {
    try {
-      const partners = await prisma.client.findMany({
+      const { skip, take } = getPaginationParams(req);
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = take;
+
+      const clients = await prisma.client.findMany({
+         skip,
+         take,
+         orderBy: { createdAt: "desc" },
          select: {
             id: true,
             image: true,
             alt: true,
          },
       });
-      res.status(200).json({ data: partners });
+      const totalCount = await prisma.client.count();
+      res.status(200).json(
+         createPaginatedResponse(clients, totalCount, page, limit)
+      );
    } catch (error) {
       errorHandler(error as Error, req, res);
       next(error);

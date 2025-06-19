@@ -7,17 +7,19 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/ui/pagination";
+import { cn } from "@/lib/utils";
 
 interface PaginationProps {
 	pageNo: number;
 	totalPages: number;
 	setPageNo: (pageNo: number) => void;
+	className?: string;
 }
 
-export function Pagination({ pageNo, totalPages, setPageNo }: PaginationProps) {
+export function Pagination({ pageNo, totalPages, setPageNo, className }: PaginationProps) {
 	if (pageNo <= totalPages) {
 		return (
-			<PaginationComponent className="justify-start">
+			<PaginationComponent className={cn("justify-start", className)}>
 				<PaginationContent>
 					<PaginationItem>
 						<PaginationPrevious

@@ -86,6 +86,10 @@ type Client = {
    alt: string | null;
 };
 
+type ClientsResponse = PaginationResponse & {
+   data: Client[] | [];
+};
+
 type Work = {
    id: string;
    image: string;

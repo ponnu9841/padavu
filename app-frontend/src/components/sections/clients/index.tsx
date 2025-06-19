@@ -4,7 +4,13 @@ import Link from "next/link";
 import React from "react";
 import ClientLists from "./client-lists";
 
-export default function Clients({ clientsData }: { clientsData: Client[] }) {
+export default function Clients({
+   clientsData,
+   showButton = false,
+}: {
+   clientsData: ClientsResponse;
+   showButton?: boolean;
+}) {
    return (
       <section className="px-4 max-w-6xl mx-auto">
          {/* <h2 className="mb-3">Our Clients</h2> */}
@@ -15,9 +21,11 @@ export default function Clients({ clientsData }: { clientsData: Client[] }) {
          />
 
          {clientsData && <ClientLists clientsData={clientsData} />}
-         <Link href="/clients" className="flex justify-center">
-            <Button size="lg">View More</Button>
-         </Link>
+         {showButton && (
+            <Link href="/clients" className="flex justify-center">
+               <Button size="lg">View More</Button>
+            </Link>
+         )}
       </section>
    );
 }

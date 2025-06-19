@@ -30,7 +30,7 @@ export default function Experts({ experts }: { experts?: Experts[] }) {
    const livingRoom = experts[3];
 
    return (
-      <section className="bg-secondary text-background">
+      <section className="text-background">
          <div className="bg-card rounded-xl md:rounded-4xl 2xl:rounded-[5rem] p-5 md:p-10">
             <AnimatedTypography
                variant="h2"

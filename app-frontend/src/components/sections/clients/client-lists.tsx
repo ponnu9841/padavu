@@ -6,11 +6,11 @@ import React from "react";
 export default function ClientLists({
    clientsData,
 }: {
-   clientsData: Client[];
+   clientsData: ClientsResponse;
 }) {
    return (
       <ul className="flex flex-wrap justify-center gap-5 text-sm">
-         {clientsData.map((client, index) => (
+         {clientsData.data.map((client, index) => (
             <li key={index}>
                <ZoomAnimation>
                   <NextImage

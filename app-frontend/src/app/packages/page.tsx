@@ -561,22 +561,22 @@ export default async function PackageDisplay() {
          <div className="container my-8">
             {/* Package Tabs */}
             <Tabs defaultValue="opulent" className="w-full">
-               <TabsList className="grid w-full grid-cols-3 mb-8">
+               <TabsList className="w-full mb-8 h-10">
                   <TabsTrigger
                      value="opulent"
-                     className="text-lg font-semibold"
+                     className="text-lg font-semibold flex-1 cursor-pointer"
                   >
                      Opulent
                   </TabsTrigger>
                   <TabsTrigger
                      value="majesty"
-                     className="text-lg font-semibold"
+                     className="text-lg font-semibold flex-1 cursor-pointer"
                   >
                      Majesty
                   </TabsTrigger>
                   <TabsTrigger
                      value="sovereignty"
-                     className="text-lg font-semibold"
+                     className="text-lg font-semibold flex-1 cursor-pointer"
                   >
                      Sovereignty
                   </TabsTrigger>

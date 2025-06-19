@@ -26,9 +26,16 @@ jobs:
 
           echo "Node version:"
           node -v
+          
+          echo "Navigating to Next.js frontend directory..."
+          cd /home/ubuntu/padavu
+          git config --global --add safe.directory /home/ubuntu/padavu
+
+          echo "Pulling latest code from master branch..."
+          git pull
 
           echo "Deploy backend"
-          cd ../app-backend
+          cd app-backend
 
           echo "Installing dependencies with npm..."
           npm install
@@ -45,14 +52,7 @@ jobs:
 
           echo "✅ Express.js Deployment completed successfully!"
 
-          echo "Navigating to Next.js frontend directory..."
-          cd /home/ubuntu/padavu
-          git config --global --add safe.directory /home/ubuntu/padavu
-
-          echo "Pulling latest code from master branch..."
-          git pull
-
-          cd app-frontend
+          cd ../app-frontend
           
           echo "Installing dependencies with Yarn..."
           yarn install --frozen-lockfile

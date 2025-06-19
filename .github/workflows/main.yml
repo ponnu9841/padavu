@@ -40,10 +40,6 @@ jobs:
           echo "Installing dependencies with npm..."
           npm install
 
-          echo "Prisma migration..."
-          npx prisma migrate deploy
-          npx prisma generate
-
           echp "Building Express project..."
           npm run build
 
@@ -55,7 +51,7 @@ jobs:
           cd ../app-frontend
           
           echo "Installing dependencies with Yarn..."
-          yarn install --frozen-lockfile
+          yarn install
 
           echo "Building Next.js project..."
           yarn build

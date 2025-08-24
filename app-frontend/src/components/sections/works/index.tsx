@@ -12,7 +12,7 @@ export default function Works() {
          <AnimatedTypography
             variant="h2"
             text="Completed Works"
-            className="text-primary mb-4"
+            className="mb-4"
          />
          {/* <h2 className="mb-4 text-primary">Completed works</h2> */}
          <WorksList showPagination={false} />

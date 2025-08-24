@@ -17,7 +17,7 @@ export default function Testimonials({
             <AnimatedTypography
                variant="h2"
                text="TESTIMONIALS"
-               className="text-center text-primary mb-4 lg:mb-8"
+               className="text-center mb-4 lg:mb-8"
             />
             <div className="mt-6">
                <CarouselSlider

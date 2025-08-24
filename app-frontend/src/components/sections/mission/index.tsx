@@ -7,12 +7,12 @@ import { AnimateElement } from "@/components/animation";
 export default function Mission({ missionData }: { missionData: Mission }) {
    return (
       <section className="px-4 flex flex-col md:flex-row gap-6 max-w-6xl mx-auto">
-         <div className="md:w-3/5 text-primary/90">
+         <div className="md:w-3/5 text-foreground/90">
             {/* <h2 className="text-2xl font-bold mb-6">Our Mission</h2> */}
             <AnimatedTypography
                variant="h2"
                text="Our Mission"
-               className="text-2xl font-bold mb-6 text-primary/90"
+               className="text-2xl font-bold mb-6 text-foreground/90"
             />
 
             <AnimateElement animation="fadeInUp" duration={0.7}>

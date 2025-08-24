@@ -1,7 +1,7 @@
 import AnimatedTypography from "@/components/animation/animated-typography";
 import NextImage from "@/components/Image";
 import { Button } from "@/components/ui/button";
-import parse from "html-react-parser";
+// import parse from "html-react-parser";
 import Link from "next/link";
 
 const packages = [
@@ -52,12 +52,12 @@ export default function Packages() {
                            src={item.image}
                         />
 
-                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white">
+                        {/* <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/50 text-white">
                            <h4 className="text-xl font-bold">{item.title}</h4>
                            <div className="text-xs mt-2">
                               {parse(item.description || "")}
                            </div>
-                        </div>
+                        </div> */}
                      </div>
                      <div className="mb-2">
                         <p className="text-green-600 font-bold text-xl">

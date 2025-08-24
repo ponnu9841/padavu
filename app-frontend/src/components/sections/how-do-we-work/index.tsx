@@ -36,7 +36,7 @@ export default function HowDoWeWork() {
          <AnimatedTypography
             variant="h2"
             text="HOW DO WE WORK"
-            className="text-4xl font-bold text-center text-primary mb-10"
+            className="text-4xl font-bold text-center text-foreground mb-10"
          />
 
          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
@@ -54,7 +54,7 @@ export default function HowDoWeWork() {
                         className="mx-auto"
                      />
                   </div>
-                  <div className="text-primary font-semibold mb-1">
+                  <div className="text-foreground font-semibold mb-1">
                      {index + 1}.
                   </div>
                   <AnimateElement
@@ -64,7 +64,7 @@ export default function HowDoWeWork() {
                      <RenderElement
                         title={step.title}
                         variant="h3"
-                        className="text-primary text-sm font-medium"
+                        className="text-foreground text-sm font-medium"
                      />
                   </AnimateElement>
                </div>

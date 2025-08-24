@@ -1,17 +1,17 @@
 import AnimatedTypography from "@/components/animation/animated-typography";
 import NextImage from "@/components/Image";
-import { cn } from "@/lib/utils";
+// import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
-const BgShade = ({ className }: { className?: string }) => (
-   <div
-      className={cn(
-         "absolute inset-0 bg-black/50 w-full h-full z-1",
-         className
-      )}
-   />
-);
+// const BgShade = ({ className }: { className?: string }) => (
+//    <div
+//       className={cn(
+//          "absolute inset-0 bg-black/50 w-full h-full z-1",
+//          className
+//       )}
+//    />
+// );
 
 const Heading = ({ heading }: { heading: string }) => (
    <AnimatedTypography
@@ -35,7 +35,7 @@ export default function Experts({ experts }: { experts?: Experts[] }) {
             <AnimatedTypography
                variant="h2"
                text="OUR EXPERTISM"
-               className="text-center text-primary mb-3"
+               className="text-center mb-3"
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-3">
@@ -49,7 +49,7 @@ export default function Experts({ experts }: { experts?: Experts[] }) {
                            alt={kitchen1.alt || kitchen1.title}
                         />
                         <Heading heading={kitchen1.title.toUpperCase()} />
-                        <BgShade className="lg:rounded-tl-4xl" />
+                        {/* <BgShade className="lg:rounded-tl-4xl" /> */}
                      </Link>
                   </div>
                )}
@@ -64,7 +64,7 @@ export default function Experts({ experts }: { experts?: Experts[] }) {
                            alt={kitchen2.alt || kitchen2.title}
                         />
                         <Heading heading={kitchen2.title.toUpperCase()} />
-                        <BgShade className="lg:rounded-r-4xl" />
+                        {/* <BgShade className="lg:rounded-r-4xl" /> */}
                      </Link>
                   </div>
                )}
@@ -81,7 +81,7 @@ export default function Experts({ experts }: { experts?: Experts[] }) {
                            alt={bedroom.alt || bedroom.title}
                         />
                         <Heading heading={bedroom.title.toUpperCase()} />
-                        <BgShade className="lg:rounded-bl-4xl" />
+                        {/* <BgShade className="lg:rounded-bl-4xl" /> */}
                      </Link>
                   </div>
                )}
@@ -99,7 +99,7 @@ export default function Experts({ experts }: { experts?: Experts[] }) {
                            alt={livingRoom.alt || livingRoom.title}
                         />
                         <Heading heading={livingRoom.title.toUpperCase()} />
-                        <BgShade />
+                        {/* <BgShade /> */}
                      </Link>
                   </div>
                )}

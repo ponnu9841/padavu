@@ -1,12 +1,20 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import { Lato, Montserrat } from "next/font/google";
 import "@/styles/globals.css";
 import Layout from "@/components/layout";
 import Provider from "@/store/provider";
+import FloatingWhatsApp from "@/components/floating-whatsapp";
 
-const font = Noto_Sans_JP({
-   subsets: ["latin", "cyrillic"],
+const font = Lato({
+   weight: ["400", "700"],
+   subsets: ["latin"],
    variable: "--font-primary",
+});
+
+const fontAlt = Montserrat({
+   weight: ["500", "700"],
+   subsets: ["latin"],
+   variable: "--font-secondary",
 });
 
 export const metadata: Metadata = {
@@ -22,9 +30,18 @@ export default function RootLayout({
    return (
       <Provider>
          <html lang="en">
-            <body className={`${font.variable} antialiased`}>
+            <body
+               className={`${font.variable} ${fontAlt.variable} antialiased`}
+            >
                <Layout>
                   <main>{children}</main>
+                  <FloatingWhatsApp
+                     phone="9447659144"
+                     message="Hi! I came from your website and need help."
+                     showBadge
+                     bottom={20}
+                     right={20}
+                  />
                </Layout>
             </body>
          </html>

@@ -8,12 +8,12 @@ import { AnimateElement } from "@/components/animation";
 export default function Vision({ visionData }: { visionData: Vision }) {
    return (
       <section className="py-10 px-4 flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
-         <div className="md:w-1/2 text-primary/90">
+         <div className="md:w-1/2 text-foreground/90">
             {/* <h2 className="text-2xl font-bold mb-4 mg:mt-8">Our Vision</h2> */}
             <AnimatedTypography
                variant="h2"
                text="Our Vision"
-               className="text-2xl font-bold mb-6 text-primary/90"
+               className="text-2xl font-bold mb-6 text-foreground/90"
             />
             <AnimateElement animation="fadeInUp" duration={1}>
                <div className="[&>ol]:list-disc [&>ol]:ml-6">

@@ -20,17 +20,17 @@ export default function About({
             <AnimatedTypography
                variant="h2"
                text="About Us"
-               className="lg:mb-8 text-primary"
+               className="lg:mb-8 text-foreground"
             />
 
             <AnimateElement animation="fadeInUp">
-               <div className="text-primary">
+               <div className="text-foreground">
                   {parse(aboutData?.short_description || "")}
                </div>
             </AnimateElement>
             {showLongDescription && (
                <AnimateElement animation="fadeInUp">
-                  <div className="text-primary">
+                  <div className="text-foreground">
                      {parse(aboutData?.long_description || "")}
                   </div>
                </AnimateElement>

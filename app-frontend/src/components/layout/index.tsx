@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: ReactNode }) {
          <header className="bg-primary text-background p-4 sticky top-0 z-50 shadow h-25 flex items-center">
             <div className="container flex justify-between items-center">
                <Link href="/" className="text-2xl font-bold">
-                  <NextImage src="/images/logo.webp" className="aspect-[3/1] w-50 max-h-25" />
+                  <NextImage src="/images/logo.webp" className="aspect-[3/1] w-50 md:w-70 max-h-35" />
                </Link>
                <NavigationMenu />
             </div>

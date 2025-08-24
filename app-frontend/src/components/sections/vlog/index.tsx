@@ -10,7 +10,7 @@ export default function Vlogs({ blogData }: { blogData: BlogResponse }) {
             <AnimatedTypography
                variant="h2"
                text="Blog"
-               className="text-primary mb-4 lg:mb-8"
+               className="mb-4 lg:mb-8"
             />
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 overflow-hidden">
                {blogData.data.map((item) => (

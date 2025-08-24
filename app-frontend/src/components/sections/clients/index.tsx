@@ -17,12 +17,12 @@ export default function Clients({
          <AnimatedTypography
             variant="h2"
             text="OUR CLIENTS"
-            className="text-center text-primary mb-4 lg:mb-8"
+            className="text-center mb-4 lg:mb-8"
          />
 
          {clientsData && <ClientLists clientsData={clientsData} />}
          {showButton && (
-            <Link href="/clients" className="flex justify-center">
+            <Link href="/clients" className="flex justify-center mt-4">
                <Button size="lg">View More</Button>
             </Link>
          )}

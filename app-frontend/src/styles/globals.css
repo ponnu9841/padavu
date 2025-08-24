@@ -125,6 +125,15 @@
    @apply mx-auto;
 }
 
+.font-primary {
+   font-family: var(--font-secondary);
+   font-weight: 400;
+}
+
+body {
+   font-family: var(--font-primary);
+}
+
 @layer base {
    * {
       @apply border-border;

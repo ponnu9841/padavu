@@ -8,7 +8,7 @@ import HowDoWeWork from "@/components/sections/how-do-we-work";
 import Mission from "@/components/sections/mission";
 import Packages from "@/components/sections/packages";
 import Products from "@/components/sections/products";
-// import Stats from "@/components/sections/stats";
+import Stats from "@/components/sections/stats";
 import Testimonials from "@/components/sections/testimonials";
 import Vision from "@/components/sections/vision";
 import Vlogs from "@/components/sections/vlog";
@@ -62,7 +62,7 @@ const Home = async () => {
          <Hero banners={bannerData} />
 
          {/* Stats Section */}
-         {/* <Stats /> */}
+         <Stats />
 
          {/* Experts Section */}
          {expertsData && <Experts experts={expertsData} />}

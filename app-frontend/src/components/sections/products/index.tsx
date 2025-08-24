@@ -15,7 +15,7 @@ export default function Products({
          <AnimatedTypography
             variant="h2"
             text="Products"
-            className="max-w-6xl mx-auto px-4 mb-4 mt-8 text-primary"
+            className="max-w-6xl mx-auto px-4 mb-4 mt-8"
          />
          <div className="flex flex-col gap-6">
             {productsData.map((item) => (

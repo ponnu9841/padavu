@@ -23,7 +23,7 @@ export default function AnimatedTypography({
 }) {
    const Tag = tagMap[variant] as keyof React.JSX.IntrinsicElements;
    return (
-      <Tag className={cn(className)}>
+      <Tag className={cn("text-foreground font-primary font-semibold", className)}>
          <span className="sr-only">{text}</span>
          <AnimateText text={text} />
       </Tag>

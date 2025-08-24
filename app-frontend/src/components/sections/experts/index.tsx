@@ -17,7 +17,7 @@ const Heading = ({ heading }: { heading: string }) => (
    <AnimatedTypography
       variant="h2"
       text={heading}
-      className="absolute top-6 left-6 z-2 text-lg lg:text-6xl"
+      className="absolute top-6 left-6 z-2 text-lg lg:text-6xl text-white"
    />
 );
 

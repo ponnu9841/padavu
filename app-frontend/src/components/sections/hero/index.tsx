@@ -39,7 +39,7 @@ export default function Hero({ banners }: { banners: Banner[] | null }) {
                   cardContentClassName="min-h-[70vh] lg:min-h-[80vh] xl:min-h-screen"
                   id="home-slider"
                   showTitle
-                  renderBackground
+                  // renderBackground
                   loop={false}
                ></CarouselSlider>
                {/* <div className="absolute left-3 bottom-3 lg:left-20 lg:bottom-20 grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-6 max-w-[calc(100%-1.5rem)]">

@@ -77,11 +77,11 @@ const Home = async () => {
          {/* About */}
          {aboutData && <About aboutData={aboutData} />}
 
-         {/* Our Mission */}
-         {missionData && <Mission missionData={missionData} />}
-
          {/* Vision */}
          {visionData && <Vision visionData={visionData} />}
+
+         {/* Our Mission */}
+         {missionData && <Mission missionData={missionData} />}
 
          {/* Clients */}
          {clientsData && <Clients clientsData={clientsData} showButton />}

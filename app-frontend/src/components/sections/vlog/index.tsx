@@ -14,7 +14,7 @@ export default function Vlogs({ vlogData }: { vlogData: VlogResponse | null }) {
             if (index < 4)
               return (
                 <div className="flex flex-col" key={item.id}>
-                  <iframe src={item.url} />
+                  <iframe src={item.url} className="aspect-[9/16]" />
                 </div>
               );
           })}

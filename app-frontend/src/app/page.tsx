@@ -72,7 +72,7 @@ const Home = async () => {
 
          {/* Packages Section */}
          {packagesData && <Packages packages={packagesData} />}
-         <Packages />
+         {/* <Packages /> */}
 
          {/* How Do we work */}
          <HowDoWeWork />

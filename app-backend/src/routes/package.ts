@@ -64,8 +64,6 @@ router.post(
                image: filePath,
                alt: data.imageAlt,
                title: data.title,
-               description: data.description,
-               long_description: data.longDescription,
                price: data.price,
             };
             const response = validatePackagePostRequest(reqBody);

@@ -60,8 +60,6 @@ const Home = async () => {
       getVlogResponse(),
    ]);
 
-   console.log(vlogData)
-
    return (
       <>
          <Hero banners={bannerData} />

@@ -1,30 +1,33 @@
-import NextImage from "@/components/Image";
 import { Pagination } from "@/components/pagination";
 import { Skeleton } from "@/components/ui/skeleton";
 import EditButton from "@/components/admin/edit-button";
 import {
-   fetchBlogs,
-   setSelectedBlog,
+   fetchVlogs,
+   setSelectedVlog,
    setPageNo,
-} from "@/store/features/blogs-slice";
+   getVlogs,
+   getVlogsLoading,
+   getVlogsPageNo,
+} from "@/store/features/vlogs-slice";
 import { DeleteDrawer } from "../delete-drawer";
-import parse from "html-react-parser";
 import { useAppDispatch, useAppSelector } from "@/hooks/use-store";
 import axiosInstance from "@/lib/axios";
 
-export default function BlogsData() {
+export default function VlogsData() {
    const dispatch = useAppDispatch();
-   const { loading, pageNo, blogs } = useAppSelector((state) => state.blogs);
+   const loading = useAppSelector(getVlogsLoading);
+   const pageNo = useAppSelector(getVlogsPageNo);
+   const vlogs = useAppSelector(getVlogs);
 
-   const lastPage = blogs?.totalPages;
+   const lastPage = vlogs?.totalPages;
 
-   const deleteBlog = async (id: string, image: string) => {
+   const deleteBlog = async (id: string) => {
       try {
-         const response = await axiosInstance.delete(`/blogs`, {
-            params: { id, image },
+         const response = await axiosInstance.delete(`/vlogs`, {
+            params: { id },
          });
          if (response && response.status === 200) {
-            dispatch(fetchBlogs({ pageNo }));
+            dispatch(fetchVlogs({ pageNo }));
          }
       } catch (error) {
          throw error;
@@ -40,37 +43,34 @@ export default function BlogsData() {
                   .map((_, index) => (
                      <Skeleton key={index} className="aspect-square" />
                   ))}
-            {!loading && blogs?.data.length === 0 && (
+            {!loading && vlogs?.data.length === 0 && (
                <div className="col-span-4 text-center mt-3 text-red-500">
                   No Record Found
                </div>
             )}
             {!loading &&
-               blogs?.data.map((blog: Blog) => (
-                  <div key={blog.id}>
+               vlogs?.data.map((vlog: Vlog) => (
+                  <div key={vlog.id}>
                      <div className="relative">
-                        <NextImage className="aspect-square" src={blog.image} />
+                        <iframe className="w-full"
+                           src={vlog.url}>
+                        </iframe>
                         <div className="absolute bottom-0 right-0">
                            <EditButton
-                              onClick={() => dispatch(setSelectedBlog(blog))}
+                              onClick={() => dispatch(setSelectedVlog(vlog))}
                            />
                            <DeleteDrawer
-                              title={`Delete Blog ${blog.title}`}
+                              title={`Delete Vlog`}
                               description={`Are you sure you want to delete this blog? This action cannot be undone.`}
-                              onDelete={() => deleteBlog(blog.id, blog.image)}
+                              onDelete={() => deleteBlog(vlog.id)}
                            />
                         </div>
                      </div>
-                     <div className="mt-3">
-                        <b>Title </b> {blog.title}
-                     </div>
-                     <div className="mt-3">
-                        <b>Description </b> {parse(blog.content)}
-                     </div>
+                     
                   </div>
                ))}
          </div>
-         {!loading && blogs?.data.length ? (
+         {!loading && vlogs?.data.length ? (
             <div className="mt-6">
                <Pagination
                   pageNo={pageNo}

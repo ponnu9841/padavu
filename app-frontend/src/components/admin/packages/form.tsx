@@ -15,7 +15,6 @@ import {
    FormMessage,
 } from "@/components/ui/form";
 import FileUpload from "@/components/file-upload";
-import TextEditor from "@/components/text-editor";
 import { fetchPackage } from "@/store/features/packages-slice";
 
 const defaultValues = {
@@ -47,8 +46,6 @@ export default function PackagesForm() {
       const form = new FormData();
       form.append("alt", data.imageAlt || "");
       form.append("title", data.title || "");
-      form.append("description", data.description || "");
-      form.append("long_description", data.longDescription || "");
       form.append("price", data.price);
       form.append("existingImage", existingImage);
       if (data.image.length > 0) {
@@ -81,8 +78,6 @@ export default function PackagesForm() {
             image: [],
             imageAlt: selectedPackage.alt || "",
             title: selectedPackage.title,
-            description: selectedPackage.description,
-            longDescription: selectedPackage.long_description || "",
             price: selectedPackage.price,
          });
          setExistingImage(selectedPackage.image);
@@ -153,46 +148,6 @@ export default function PackagesForm() {
                />
             </div>
 
-            <div className="mt-4">
-               <FormField
-                  control={form.control}
-                  name="description"
-                  render={({ field, fieldState: { error } }) => (
-                     <FormItem>
-                        <FormLabel>Description</FormLabel>
-                        <FormControl>
-                           <TextEditor
-                              placeholder="Enter description"
-                              value={field.value}
-                              setValue={field.onChange}
-                              error={error?.message}
-                           />
-                        </FormControl>
-                        <FormMessage />
-                     </FormItem>
-                  )}
-               />
-            </div>
-            <div className="mt-4">
-               <FormField
-                  control={form.control}
-                  name="longDescription"
-                  render={({ field, fieldState: { error } }) => (
-                     <FormItem>
-                        <FormLabel>Long Description</FormLabel>
-                        <FormControl>
-                           <TextEditor
-                              placeholder="Enter long description"
-                              value={field.value}
-                              setValue={field.onChange}
-                              error={error?.message}
-                           />
-                        </FormControl>
-                        <FormMessage />
-                     </FormItem>
-                  )}
-               />
-            </div>
             <div className="mt-4">
                <FormField
                   control={form.control}

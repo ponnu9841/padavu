@@ -40,11 +40,11 @@ const items = [
     url: "/dashboard/about",
     icon: FaInfoCircle,
   },
-  // {
-  //   title: "Packages",
-  //   url: "/dashboard/packages",
-  //   icon: FaInfoCircle,
-  // },
+  {
+    title: "Packages",
+    url: "/dashboard/packages",
+    icon: FaInfoCircle,
+  },
   {
     title: "Clients",
     url: "/dashboard/clients",
@@ -76,8 +76,8 @@ const items = [
     icon: FaAddressBook,
   },
   {
-    title: "Blogs",
-    url: "/dashboard/blogs",
+    title: "Vlogs",
+    url: "/dashboard/vlogs",
     icon: FaBlog,
   },
   {

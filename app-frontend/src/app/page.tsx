@@ -20,10 +20,11 @@ import {
    getClientsResponse,
    getExpertsResponse,
    getMissionResponse,
-   // getPackagesResponse,
+   getPackagesResponse,
    getProductsResponse,
    getTestimonialsResponse,
    getVisionResponse,
+   getVlogResponse,
    // getWorksResponse,
 } from "@/lib/get-data";
 import { generatePageMetadata } from "@/lib/utils";
@@ -34,7 +35,7 @@ const Home = async () => {
    const [
       bannerData,
       expertsData,
-      // packagesData,
+      packagesData,
       aboutData,
       missionData,
       visionData,
@@ -43,10 +44,11 @@ const Home = async () => {
       testimonialsData,
       productsData,
       blogData,
+      vlogData,
    ] = await Promise.all([
       getBannersResponse(),
       getExpertsResponse(),
-      // getPackagesResponse(),
+      getPackagesResponse(),
       getAboutResponse(),
       getMissionResponse(),
       getVisionResponse(),
@@ -55,7 +57,10 @@ const Home = async () => {
       getTestimonialsResponse(),
       getProductsResponse(),
       getBlogsResponse(),
+      getVlogResponse(),
    ]);
+
+   console.log(vlogData)
 
    return (
       <>
@@ -68,8 +73,8 @@ const Home = async () => {
          {expertsData && <Experts experts={expertsData} />}
 
          {/* Packages Section */}
-         {/* {packagesData && <Packages packages={packagesData} />} */}
-         <Packages />
+         {packagesData && <Packages packages={packagesData} />}
+         {/* <Packages /> */}
 
          {/* How Do we work */}
          <HowDoWeWork />
@@ -90,13 +95,13 @@ const Home = async () => {
          <Works />
 
          {/* Testimonials Section */}
-         {testimonialsData && <Testimonials testimonialsData={testimonialsData} />}
+         {testimonialsData?.length && <Testimonials testimonialsData={testimonialsData} />}
 
          {/* Products */}
          {productsData && <Products productsData={productsData} />}
 
          {/* Vlogs  */}
-         {blogData && <Vlogs blogData={blogData} />}
+         {blogData && <Vlogs vlogData={vlogData} />}
       </>
    );
 };

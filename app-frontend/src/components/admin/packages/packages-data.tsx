@@ -3,7 +3,6 @@ import { useAppSelector, useAppDispatch } from "@/hooks/use-store";
 import { DeleteDrawer } from "@/components/admin/delete-drawer";
 import axiosInstance from "@/lib/axios";
 import { setSelectedPackage } from "@/store/features/packages-slice";
-import parse from "html-react-parser";
 import EditButton from "../edit-button";
 import { fetchProducts } from "@/store/features/products-slice";
 
@@ -56,10 +55,7 @@ export default function BannerData() {
                        <span className="font-bold">Title:&nbsp;</span>
                        {packageData.title}
                     </div>
-                    <div className="mt-3 max-h-[100px] overflow-auto">
-                       <span className="font-bold">Description:&nbsp;</span>
-                       {parse(packageData.description)}
-                    </div>
+                    
                     <div className="mt-3">
                        <span className="font-bold">Price:&nbsp;</span>
                        {packageData.price}

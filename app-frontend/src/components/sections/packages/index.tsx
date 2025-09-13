@@ -4,31 +4,31 @@ import { Button } from "@/components/ui/button";
 // import parse from "html-react-parser";
 import Link from "next/link";
 
-const packages = [
-   {
-      id: "1",
-      title: "OPULENCE",
-      description: "BASIC REQUIREMENT FOR 2 BHK 6.5 LAKH",
-      price: "6.5 LAKH",
-      image: "/images/packages/output.jpg",
-   },
-   {
-      id: "2",
-      title: "MAJESTY",
-      description: "BEYOND IMAGINATION 3 BHK 8 LAKH",
-      price: "8 LAKH",
-      image: "/images/packages/output-1.jpg",
-   },
-   {
-      id: "3",
-      title: "SOVEREIGNTY",
-      description: "ALL WORK CUSTOM DESIGN 10 LAKH",
-      price: "11 LAKH",
-      image: "/images/packages/output-2.jpg",
-   },
-];
+// const packages = [
+//    {
+//       id: "1",
+//       title: "OPULENCE",
+//       description: "BASIC REQUIREMENT FOR 2 BHK 6.5 LAKH",
+//       price: "6.5 LAKH",
+//       image: "/images/packages/output.jpg",
+//    },
+//    {
+//       id: "2",
+//       title: "MAJESTY",
+//       description: "BEYOND IMAGINATION 3 BHK 8 LAKH",
+//       price: "8 LAKH",
+//       image: "/images/packages/output-1.jpg",
+//    },
+//    {
+//       id: "3",
+//       title: "SOVEREIGNTY",
+//       description: "ALL WORK CUSTOM DESIGN 10 LAKH",
+//       price: "11 LAKH",
+//       image: "/images/packages/output-2.jpg",
+//    },
+// ];
 
-export default function Packages() {
+export default function Packages({ packages }: { packages: PackagesData[] }) {
    return (
       <section className="relative text-primary">
          <div className="p-5 md:p-10">

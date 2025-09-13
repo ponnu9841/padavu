@@ -73,8 +73,6 @@ type Banner = {
 type PackagesData = {
    id: string;
    title: string;
-   description: string;
-   long_description: string | null;
    image: string;
    alt: string | null;
    price: string;
@@ -128,9 +126,18 @@ type Blog = {
    updatedAt: string;
 };
 
+type Vlog = {
+   id: string;
+   url: string;
+}
+
 type BlogResponse = PaginationResponse & {
    data: Blog[] | [];
 };
+
+type VlogResponse = PaginationResponse & {
+   data : Vlog[] | [];
+}
 
 type About = {
    id: string;

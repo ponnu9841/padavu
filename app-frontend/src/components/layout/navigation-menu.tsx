@@ -18,7 +18,7 @@ export const navItems = [
    { name: "Clients", link: "/clients" },
    { name: "Works", link: "/works" },
    { name: "Products", link: "/products" },
-   { name: "Blog", link: "/blog" },
+   { name: "Vlog", link: "/vlog" },
    { name: "Contact", link: "/contact" },
 ];
 

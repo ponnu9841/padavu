@@ -23,7 +23,7 @@ export default function DashBoardLayout({ children }: ReactChildren) {
 	useEffect(() => {
 		const token = getToken();
 		if(!token){
-			router.push("/login");
+			router.replace("/login");
 			return;
 		}
 		const controller = new AbortController();
@@ -34,7 +34,7 @@ export default function DashBoardLayout({ children }: ReactChildren) {
 	useEffect(() => {
 		if(user.type && user.type !== "admin") {
 			clearToken();
-			router.push("/login");
+			router.replace("/login");
 			handleToast("You are not authorized to access this page");
 			return
 		}

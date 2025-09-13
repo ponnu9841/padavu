@@ -211,4 +211,4 @@ export const getProductsResponse = () => fetchData<Product[]>("/products");
 export const getBlogsResponse = () => fetchData<BlogResponse>("/blogs");
 export const getContactResponse = () => fetchData<Contact>("/contact");
 export const getSeoTagsResponse = () => fetchData<Seo[]>("/seoTags");
-
+export const getVlogResponse = () => fetchData<VlogResponse>("/vlog");

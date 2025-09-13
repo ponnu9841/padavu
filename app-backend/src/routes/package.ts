@@ -13,8 +13,6 @@ const columns = {
    image: true,
    alt: true,
    title: true,
-   description: true,
-   long_description: true,
    price: true,
 };
 

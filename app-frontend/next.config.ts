@@ -29,6 +29,10 @@ const nextConfig: NextConfig = {
             pathname: "/uploads/**",
             port: "8000",
          },
+         {
+            protocol: "https",
+            hostname: "youtube.com",
+         },
       ],
    },
 };

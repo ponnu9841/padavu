@@ -47,8 +47,6 @@ model Package {
   image            String   @db.VarChar(255)
   alt              String?  @db.VarChar(255)
   title            String   @db.VarChar(255)
-  description      String
-  long_description String?
   price            String   @db.VarChar(255)
   createdAt        DateTime @default(now()) @map("created_at")
   updatedAt        DateTime @updatedAt @map("updated_at")
@@ -125,6 +123,15 @@ model Blog {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("blogs")
+}
+
+model Vlog {
+  id        String   @id @default(uuid())
+  url       String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("vlogs")
 }
 
 model About {

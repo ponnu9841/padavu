@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
 import { Lato, Montserrat } from "next/font/google";
 import "@/styles/globals.css";

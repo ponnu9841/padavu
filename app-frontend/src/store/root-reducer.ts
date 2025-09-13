@@ -9,7 +9,7 @@ import worksSliceReducer from "./features/works-slice";
 import testimonialsSliceReducer from "./features/testimonial-slice";
 import expertsSliceReducer from "./features/experts-slice";
 import productsSliceReducer from "./features/products-slice";
-import blogsSliceReducer from "./features/blogs-slice";
+import vlogsSliceReducer from "./features/vlogs-slice";
 import aboutSliceReducer from "./features/about-slice";
 import pagesBannerSliceReducer from "./features/pages-banner-slice";
 import seoSliceReducer from "./features/seo-slice";
@@ -26,7 +26,7 @@ const appReducer = combineReducers({
    testimonials: testimonialsSliceReducer,
    experts: expertsSliceReducer,
    products: productsSliceReducer,
-   blogs: blogsSliceReducer,
+   vlogs: vlogsSliceReducer,
    about: aboutSliceReducer,
    pagesBanner: pagesBannerSliceReducer,
    seoTags: seoSliceReducer,

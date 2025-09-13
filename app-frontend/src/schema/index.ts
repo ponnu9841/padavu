@@ -60,10 +60,6 @@ export const packageSchema = z
       image: fileSchema(),
       imageAlt: z.string().optional(),
       title: z.string().min(3, "Title must be at least 3 characters"),
-      description: z
-         .string()
-         .min(3, "Description must be at least 3 characters"),
-      longDescription: z.string().optional(),
       price: z.string().min(1, "Price is required"),
    })
    .refine(requireImageIfNoId.condition, {
@@ -141,17 +137,10 @@ export const productSchema = z
       path: requireImageIfNoId.path,
    });
 
-export const blogSchema = z
+export const vlogSchema = z
    .object({
       id: z.string().optional(),
-      image: fileSchema(),
-      imageAlt: z.string().optional(),
-      title: z.string().min(3, "Name must be at least 3 characters"),
-      content: z.string().min(3, "Content must be at least 3 characters"),
-   })
-   .refine(requireImageIfNoId.condition, {
-      message: requireImageIfNoId.message,
-      path: requireImageIfNoId.path,
+      url: z.string().url("Invalid URL"),
    });
 
 export const aboutSchema = z
@@ -237,7 +226,7 @@ export type MissionFormData = z.infer<typeof missionSchema>;
 
 export type AboutFormData = z.infer<typeof aboutSchema>;
 
-export type BlogFormData = z.infer<typeof blogSchema>;
+export type VlogFormData = z.infer<typeof vlogSchema>;
 
 export type ProductsFormData = z.infer<typeof productSchema>;
 

@@ -23,7 +23,7 @@ export default function VlogsData() {
 
    const deleteBlog = async (id: string) => {
       try {
-         const response = await axiosInstance.delete(`/vlogs`, {
+         const response = await axiosInstance.delete(`/vlog`, {
             params: { id },
          });
          if (response && response.status === 200) {

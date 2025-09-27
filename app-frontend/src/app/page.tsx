@@ -93,10 +93,10 @@ const Home = async () => {
          <Works />
 
          {/* Testimonials Section */}
-         {testimonialsData?.length && <Testimonials testimonialsData={testimonialsData} />}
+         {!!testimonialsData?.length && <Testimonials testimonialsData={testimonialsData} />}
 
          {/* Products */}
-         {productsData && <Products productsData={productsData} />}
+         {!!productsData?.length && <Products productsData={productsData} />}
 
          {/* Vlogs  */}
          {blogData && <Vlogs vlogData={vlogData} />}

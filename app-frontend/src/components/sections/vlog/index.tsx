@@ -53,9 +53,9 @@ export default function Vlogs({ vlogData }: { vlogData: VlogResponse | null }) {
             </div> */}
         </div>
         {vlogData.data.length > 4 && (
-          <div className="mt-4">
+          <div className="mt-4 flex justify-center">
             <Link href="/vlog">
-              <Button>View More</Button>
+              <Button size="lg">View More</Button>
             </Link>
           </div>
         )}

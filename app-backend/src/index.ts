@@ -46,7 +46,6 @@ app.use(
 
 // Middleware to parse JSON bodies
 app.use(express.static("public"));
-app.use(express.json());
 
 // Middleware to parse URL-encoded bodies
 app.use(express.json({ limit: "50mb" }));
